@@ -1,0 +1,131 @@
+import SwiftUI
+import RealmSwift
+
+struct CircularProgressBar: View {
+    
+    @Binding var progress:Double
+    var color: Color
+    
+    @Binding var selectionDate:Date
+    
+    var body: some View {
+        ZStack {
+            // 背景の円
+            Circle()
+                .stroke(lineWidth: 35.0)
+                .opacity(0.3)
+                .foregroundColor(color)
+            // 進捗度を表す円
+            Circle()
+                .trim(from: 0.0, to: min(progress, 1.0))
+                .stroke(style: StrokeStyle(lineWidth: 35, lineCap: .round, lineJoin: .round))
+                .foregroundColor(color)
+                .rotationEffect(Angle(degrees: 270.0))
+            VStack {
+                let differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+                Text("残り").font(.title)
+                Text("\(differenceOfDate)日").font(.largeTitle)
+            }
+        }
+    }
+}
+
+struct ButtonView: View {
+    
+    var buttonText: String
+    var width: CGFloat
+    var color: Color
+    var action: () -> Void
+    
+    var body: some View {
+        
+        ZStack {
+            
+            Color.white.frame(width: width, height: 50)
+                .cornerRadius(25)
+                .shadow(radius: 10)
+            
+            Button (action: action) {
+                Text(buttonText)
+                    .scaledToFill()
+                    .foregroundColor(color)
+            }
+        }
+    }
+}
+
+struct TaskStartSettingView: View {
+    
+    @Binding var taskName:String
+    @Binding var amountTask:Int
+    @Binding var amountToAdvancePerDay:Int
+    @State var taskUnits = ["ページ", "問", "章", "個"]
+    @State var selectedUnits = 0
+    @Binding var selectionDate:Date
+    @Binding var numberDoTask:Int
+    
+    var body: some View {
+        VStack {
+            Form {
+                Section {
+                    
+                    HStack {
+                        Text("タスク名：")
+                        TextField("タスク名をここに入力", text: $taskName)
+                            .multilineTextAlignment(TextAlignment.center)
+                    }.padding()
+                    
+                    HStack {
+                        Text("タスクの量：")
+                        TextField("1", value: $amountTask, format: .number)
+                            .multilineTextAlignment(TextAlignment.trailing)
+                        Picker(selection: $selectedUnits, label: Text("")) {
+                            ForEach(taskUnits.indices, id: \.self) { unitsIndex in
+                                Text(self.taskUnits[unitsIndex])
+                            }
+                        }.labelsHidden()
+                    }.padding()
+                    
+                    HStack {
+                        Text("1日に進める量：")
+                        Picker("", selection: $amountToAdvancePerDay) {
+                            ForEach(1...amountTask, id: \.self) { value in
+                                Text("\(value)")
+                            }
+                        }
+                        .frame(height: 100)
+                        .clipped()
+                        .pickerStyle(.wheel)
+                        
+                        Picker(selection: $selectedUnits, label: Text("")) {
+                            ForEach(taskUnits.indices, id: \.self) { unitsIndex in
+                                Text(self.taskUnits[unitsIndex])
+                            }
+                        }.labelsHidden()
+                    }.padding()
+                    
+                    HStack {
+                        Text("終わらせたい日：")
+                        DatePicker("", selection: $selectionDate, in: Date()..., displayedComponents: .date)
+                    }.padding()
+                    
+                    HStack {
+                        Text("\(numberDoTask)回目")
+                    }.padding()
+                    
+                }
+            }.padding(.bottom)
+        }
+    }
+}
+
+struct TaskListView: View {
+    
+    var taskName: String
+    
+    var body: some View {
+        
+        Text(taskName)
+            .padding(20)
+    }
+}
