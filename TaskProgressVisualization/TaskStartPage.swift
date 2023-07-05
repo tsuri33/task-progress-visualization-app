@@ -53,6 +53,6 @@ struct TaskStartPage: View {
 
 struct TaskStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(1), storeFirstDifferenceOfDate: .constant(100))
+        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(0), storeFirstDifferenceOfDate: .constant(100))
     }
 }

@@ -33,6 +33,8 @@ struct TaskList: View {
                             .frame(width: 15, height: 15)
                         Text("\(tasks[index].taskName)")
                             .font(.title3)
+                        Text("\(tasks[index].numberDoTask)回")
+                            .frame(alignment: .trailing)
                     }
                     .swipeActions(edge: .trailing) {
                         Button {

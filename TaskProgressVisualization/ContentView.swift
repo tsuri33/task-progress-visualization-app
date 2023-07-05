@@ -13,7 +13,7 @@ struct ContentView: View {
     @State  var amountTask = 1
     @State  var amountToAdvancePerDay = 1
     @State  var selectionDate = Date()
-    @State  var numberDoTask = 1
+    @State  var numberDoTask = 0
     
     @State var differenceOfDate = 0
     @State var storeFirstDifferenceOfDate = 0

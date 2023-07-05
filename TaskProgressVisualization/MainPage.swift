@@ -19,7 +19,7 @@ struct MainPage: View {
         VStack {
             ZStack {
                 Rectangle()
-                    .stroke(lineWidth: 5)
+                    .stroke(lineWidth: 2)
                     .frame(width: frameWidth-30, height: 50)
                 Text("\(taskName)").font(.title)
             }
@@ -44,6 +44,17 @@ struct MainPage: View {
                 progressValue += raitoPerDay
                 print(Double(storeFirstDifferenceOfDate))
                 print(progressValue)
+                
+                let realm = try! Realm()
+                let taskData = realm.objects(Task.self).filter("taskName == taskName")
+                do {
+                    try realm.write {
+                        taskData.setValue(Date(), forKey: "lastDate")
+                    }
+                } catch {
+                    print("データベース更新エラー")
+                }
+                
                 if progressValue >= 1 {
                     isPregressionTask.toggle()
                     progressValue = 0
