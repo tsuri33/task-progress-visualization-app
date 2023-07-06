@@ -19,12 +19,12 @@ struct TaskStartPage: View {
             TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask)
             ButtonView(buttonText: "このタスクを開始する！", width: 220, color: .blue, action: {
                 
-                if self.taskName == "" || self.amountTask == 0 {
+                if self.taskName == "" || self.amountTask == 0 || self.amountToAdvancePerDay == 0 {
                     self.isAlert.toggle()
                 } else {
                     // レコード生成
                     let task = Task()
-                    task.taskName = taskName
+                    task.name = taskName
                     task.amountTask = amountTask
                     task.amountToAdvancePerDay = amountToAdvancePerDay
                     task.lastDate = Date()
@@ -41,8 +41,7 @@ struct TaskStartPage: View {
                     
                     let firstDifferenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
                     storeFirstDifferenceOfDate = firstDifferenceOfDate
-                    isProgressionTask.toggle()
-                    print(task)
+                    isProgressionTask = true
                 }
             }).alert(isPresented: self.$isAlert) {
                 Alert(title: Text("全ての項目を入力してください"), dismissButton: .default(Text("OK")))

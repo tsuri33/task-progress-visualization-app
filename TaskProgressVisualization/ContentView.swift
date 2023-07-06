@@ -4,6 +4,7 @@ struct ContentView: View {
     
     @State var selection = 1
     @AppStorage("isProgressionTask") var isProgressionTask = false
+    @AppStorage("progressValue") var progressValue = 0.0
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.quaternaryLabel
@@ -27,12 +28,12 @@ struct ContentView: View {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             } else {
-                MainPage(isPregressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                MainPage(progressValue: self.$progressValue, isPregressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
                     .tabItem() {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             }
-            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask)
+            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask, progressValue: self.$progressValue)
                 .tabItem() {
                     Label("設定", systemImage: "gearshape")
                 }.tag(2)

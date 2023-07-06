@@ -4,7 +4,7 @@ import RealmSwift
 struct MainPage: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
-    @AppStorage("progressValue") var progressValue = 0.0
+    @Binding var progressValue:Double
     @Binding var isPregressionTask:Bool
     
     @Binding var taskName:String
@@ -35,8 +35,9 @@ struct MainPage: View {
             }.padding()
             
             HStack {
-                Text("\(Int(progressValue*100))%").font(.largeTitle)
-                Text("達成中！").font(.title)
+                Text("達成率").font(.title3)
+                Text("\(Int(progressValue*100))").font(.largeTitle)
+                Text("%").font(.title3)
             }
             
             ButtonView(buttonText: "今日の分クリア！", width: 170, color: Color.blue, action: {
@@ -46,7 +47,7 @@ struct MainPage: View {
                 print(progressValue)
                 
                 let realm = try! Realm()
-                let taskData = realm.objects(Task.self).filter("taskName == taskName")
+                let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
                 do {
                     try realm.write {
                         taskData.setValue(Date(), forKey: "lastDate")
@@ -93,6 +94,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(isPregressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
+        MainPage(progressValue: .constant(0.5), isPregressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
     }
 }

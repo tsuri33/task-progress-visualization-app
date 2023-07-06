@@ -1,4 +1,5 @@
 import SwiftUI
+import RealmSwift
 
 struct SettingPage: View {
     
@@ -11,6 +12,8 @@ struct SettingPage: View {
     @Binding var selectionDate:Date
     @Binding var numberDoTask:Int
     
+    @Binding var progressValue:Double
+    
     var body: some View {
         if isProgressionTask {
             VStack {
@@ -22,7 +25,17 @@ struct SettingPage: View {
                     .alert(isPresented: $isAlert) {
                         Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
                             isProgressionTask = false
-                            // ここにデータベース削除のコード
+                            progressValue = 0.0
+                            // データベース削除
+                            let realm = try! Realm()
+                            let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
+                            do {
+                                try realm.write {
+                                    realm.delete(taskData)
+                                }
+                            } catch {
+                                print("データベース削除エラー")
+                            }
                         }))
                     }
             }
@@ -34,6 +47,6 @@ struct SettingPage: View {
 
 struct SettingPage_Previews: PreviewProvider {
     static var previews: some View {
-        SettingPage(isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(1) )
+        SettingPage(isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(1), progressValue: .constant(1.0) )
     }
 }
