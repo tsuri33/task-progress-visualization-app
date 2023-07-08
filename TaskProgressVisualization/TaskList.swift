@@ -41,6 +41,7 @@ struct TaskList: View {
                     .swipeActions(edge: .trailing) {
                         Button {
                             // データベース削除
+                            // 削除した後すぐに反映されるように修正する必要あり
                             let realm = try! Realm()
                             let taskData = realm.objects(Task.self).filter("name == '\(tasks[index].name)'")
                             do {

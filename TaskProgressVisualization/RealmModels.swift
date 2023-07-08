@@ -9,3 +9,7 @@ class Task: Object {
     @Persisted var lastDate:Date
     @Persisted var numberDoTask:Int
 }
+
+class Data: Object {
+    @Persisted var daysLeftsRatio:Double
+}
