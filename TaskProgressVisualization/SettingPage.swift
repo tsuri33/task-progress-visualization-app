@@ -19,6 +19,7 @@ struct SettingPage: View {
             VStack {
                 Text("設定").font(.largeTitle).padding()
                 TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask)
+                
                 ButtonView(buttonText: "現在進行中のタスクを終了する", width: 280, color: .red, action: {
                     isAlert = true
                 }).padding(.bottom)

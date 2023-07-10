@@ -41,7 +41,6 @@ struct TaskList: View {
                     .swipeActions(edge: .trailing) {
                         Button {
                             // データベース削除
-                            // 削除した後すぐに反映されるように修正する必要あり
                             let realm = try! Realm()
                             let taskData = realm.objects(Task.self).filter("name == '\(tasks[index].name)'")
                             do {
@@ -52,6 +51,8 @@ struct TaskList: View {
                                 print("データベース削除エラー")
                             }
                             print("タスク削除")
+                            // 最後に読み込むことでリストに反映
+                            tasks = realm.objects(Task.self)
                         } label: {
                             Image(systemName: "trash")
                         }

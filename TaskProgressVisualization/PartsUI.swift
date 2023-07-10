@@ -5,6 +5,7 @@ struct CircularProgressBar: View {
     
     @Binding var progress:Double
     var color: Color
+    @State var differenceOfDate = 0
     
     @Binding var selectionDate:Date
     
@@ -22,9 +23,11 @@ struct CircularProgressBar: View {
                 .foregroundColor(color)
                 .rotationEffect(Angle(degrees: 270.0))
             VStack {
-                let differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+//                var differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
                 Text("残り").font(.title)
                 Text("\(differenceOfDate)日").font(.largeTitle)
+            }.onAppear {
+                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
             }
         }
     }
@@ -40,7 +43,6 @@ struct ButtonView: View {
     var body: some View {
         
         ZStack {
-            
             Color.white.frame(width: width, height: 50)
                 .cornerRadius(25)
                 .shadow(radius: 10)
@@ -59,7 +61,7 @@ struct TaskStartSettingView: View {
     @Binding var taskName:String
     @Binding var amountTask:Int
     @Binding var amountToAdvancePerDay:Int
-    @State var taskUnits = ["ページ", "問", "章", "個"]
+    @State var taskUnits = ["ページ", "問", "個"]
     @State var selectedUnits = 0
     @Binding var selectionDate:Date
     @Binding var numberDoTask:Int
@@ -68,7 +70,6 @@ struct TaskStartSettingView: View {
         VStack {
             Form {
                 Section {
-                    
                     HStack {
                         Text("タスク名：")
                         TextField("タスク名をここに入力", text: $taskName)

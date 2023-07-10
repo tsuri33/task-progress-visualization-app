@@ -12,4 +12,5 @@ class Task: Object {
 
 class Data: Object {
     @Persisted var daysLeftsRatio:Double
+    @Persisted var differenceOfDate:Int
 }
