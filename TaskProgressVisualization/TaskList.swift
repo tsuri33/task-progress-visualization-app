@@ -5,6 +5,7 @@ struct TaskList: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
     @State var showingModal = false
+    @State var showingSecondModal = false
     @Binding var isProgressionTask:Bool
     
     @State private var tasks: Results<Task> = try! Realm().objects(Task.self)
@@ -18,9 +19,6 @@ struct TaskList: View {
     @Binding var storeFirstDifferenceOfDate:Int
     
     var body: some View {
-//        let realm = try! Realm()
-//        let tasks = realm.objects(Task.self)
-//        let numberTasks = tasks.count
         VStack {
             Text("完了タスク一覧")
                 .font(.largeTitle)
@@ -31,14 +29,14 @@ struct TaskList: View {
                         Image(systemName: "circlebadge.fill")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 10, height: 10)
+                            .frame(width: 8, height: 8)
                             .padding()
                         Text("\(tasks[index].name)")
                             .font(.title3)
                         Spacer()
                         Text("\(tasks[index].numberDoTask) 回")
                     }
-                    .swipeActions(edge: .trailing) {
+                    .swipeActions(edge: .leading) {
                         Button {
                             // データベース削除
                             let realm = try! Realm()
@@ -51,12 +49,23 @@ struct TaskList: View {
                                 print("データベース削除エラー")
                             }
                             print("タスク削除")
-                            // 最後に読み込むことでリストに反映
                             tasks = realm.objects(Task.self)
                         } label: {
                             Image(systemName: "trash")
                         }
                         .tint(.red)
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            // 2回目以降のタスク開始画面
+                            showingSecondModal.toggle()
+                            print(showingSecondModal)
+                        } label: {
+                            Image(systemName: "play")
+                        }
+                        .tint(.green)
+                    }.sheet(isPresented: $showingSecondModal) {
+                        TaskSecondStartPage(taskName: self.$taskName)
                     }
                 }
             }

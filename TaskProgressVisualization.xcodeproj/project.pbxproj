@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */; };
 		5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */; };
 		5C99B6032A553B34006597DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6022A553B34006597DE /* ContentView.swift */; };
 		5C99B6052A553B35006597DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C99B6042A553B35006597DE /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSecondStartPege.swift; sourceTree = "<group>"; };
 		5C99B5FD2A553B34006597DE /* TaskProgressVisualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskProgressVisualization.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProgressVisualizationApp.swift; sourceTree = "<group>"; };
 		5C99B6022A553B34006597DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				5C99B6022A553B34006597DE /* ContentView.swift */,
 				5C99B61B2A553CE4006597DE /* TaskList.swift */,
 				5C99B61D2A553D02006597DE /* TaskStartPage.swift */,
+				5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */,
 				5C99B6132A553C68006597DE /* MainPage.swift */,
 				5C99B6192A553CC7006597DE /* SettingPage.swift */,
 				5C99B6152A553C8C006597DE /* PartsUI.swift */,
@@ -174,6 +177,7 @@
 				5C99B6142A553C68006597DE /* MainPage.swift in Sources */,
 				5C99B6182A553CA5006597DE /* RealmModels.swift in Sources */,
 				5C99B61A2A553CC7006597DE /* SettingPage.swift in Sources */,
+				5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
