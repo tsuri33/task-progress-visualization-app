@@ -36,7 +36,7 @@ struct TaskList: View {
                         Spacer()
                         Text("\(tasks[index].numberDoTask) 回")
                     }
-                    .swipeActions(edge: .leading) {
+                    .swipeActions(edge: .trailing) {
                         Button {
                             // データベース削除
                             let realm = try! Realm()
@@ -55,7 +55,7 @@ struct TaskList: View {
                         }
                         .tint(.red)
                     }
-                    .swipeActions(edge: .trailing) {
+                    .swipeActions(edge: .leading) {
                         Button {
                             // 2回目以降のタスク開始画面
                             showingSecondModal.toggle()
