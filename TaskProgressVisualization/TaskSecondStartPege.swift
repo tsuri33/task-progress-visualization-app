@@ -6,14 +6,21 @@ struct TaskSecondStartPage: View {
     @Binding var taskName:String
     
     var body: some View {
-        ZStack {
-            let realm = try! Realm()
-            let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
+        let realm = try! Realm()
+        let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
+        VStack {
             Form {
                 Section {
                     Text("a")
+                } header: {
+                    Text("前回までの記録")
                 }
             }
+            Button(action: {
+                print(taskData)
+            } ,label: {
+                Text("データベース")
+            })
         }
     }
 }
