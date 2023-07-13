@@ -65,7 +65,7 @@ struct TaskList: View {
                         }
                         .tint(.green)
                     }.sheet(isPresented: $showingSecondModal) {
-                        TaskSecondStartPage(taskName: self.$taskName)
+                        TaskSecondStartPage(taskName: self.$taskName, amountTask: self.$amountTask)
                     }
                 }
             }

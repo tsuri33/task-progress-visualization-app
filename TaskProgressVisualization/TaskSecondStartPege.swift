@@ -4,6 +4,7 @@ import RealmSwift
 struct TaskSecondStartPage: View {
     
     @Binding var taskName:String
+    @Binding var amountTask:Int
     
     var body: some View {
         let realm = try! Realm()
@@ -27,7 +28,7 @@ struct TaskSecondStartPage: View {
 
 struct TaskSecondStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskSecondStartPage(taskName: .constant("数学"))
+        TaskSecondStartPage(taskName: .constant("数学"), amountTask: .constant(100))
     }
 }
 
