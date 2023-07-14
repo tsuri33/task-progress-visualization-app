@@ -2,6 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct TaskSecondStartPage: View {
+    // タスクが2回目以降の時に表示するビュー
     
     @Binding var taskName:String
     @Binding var amountTask:Int
