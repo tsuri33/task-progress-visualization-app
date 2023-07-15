@@ -8,6 +8,7 @@ struct TaskSecondStartPage: View {
     @Binding var amountTask:Int
     
     var body: some View {
+        // 要素を抽出して出力する方法について調べる必要あり
         let realm = try! Realm()
         let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
         VStack {
