@@ -26,12 +26,12 @@ struct MainPage: View {
             ZStack {
                 // 外円
                 CircularProgressBar(progress: $progressValue, color: .blue, selectionDate: self.$selectionDate)
-                    .frame(width: frameWidth, height: 270.0)
+                    .frame(width: frameWidth, height: frameWidth-100)
                     .padding()
                 // 内円
                 var daysLeftsRatio = Double(differenceOfDate) / Double(storeFirstDifferenceOfDate)
                 CircularProgressBar(progress: Binding<Double>(get: { Double(daysLeftsRatio) }, set: { daysLeftsRatio = Double($0) }), color: .red, selectionDate: self.$selectionDate)
-                    .frame(width: frameWidth,height: 170)
+                    .frame(width: frameWidth,height: frameWidth-210)
             }.padding()
             
             HStack {
