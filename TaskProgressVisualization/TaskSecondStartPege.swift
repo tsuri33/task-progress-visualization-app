@@ -18,7 +18,14 @@ struct TaskSecondStartPage: View {
                 } header: {
                     Text("前回までの記録")
                 }
+                Section {
+                    Text("b")
+                } header: {
+                    Text("今回の設定")
+                }
             }
+            // スタートボタンビュー
+            
             Button(action: {
                 print(taskData)
             } ,label: {
