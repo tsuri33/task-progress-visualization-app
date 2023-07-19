@@ -25,6 +25,9 @@ struct TaskSecondStartPage: View {
                 }
             }
             // スタートボタンビュー
+            ButtonView(buttonText: "タスク開始", width: 150, color: .blue, action: {
+                print("タスク開始")
+            })
             
             Button(action: {
                 print(taskData)
