@@ -33,8 +33,6 @@ struct TaskList: View {
                             .padding()
                         Text("\(tasks[index].name)")
                             .font(.title3)
-                        Spacer()
-                        Text("\(tasks[index].numberDoTask) 回")
                     }
                     .swipeActions(edge: .trailing) {
                         Button {

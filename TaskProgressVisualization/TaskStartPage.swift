@@ -28,7 +28,6 @@ struct TaskStartPage: View {
                     task.amountTask = amountTask
                     task.amountToAdvancePerDay = amountToAdvancePerDay
                     task.lastDate = Date()
-                    task.numberDoTask = numberDoTask + 1
                     // 保存
                     do {
                         let realm = try Realm()
