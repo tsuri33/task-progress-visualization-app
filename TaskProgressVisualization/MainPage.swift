@@ -60,6 +60,10 @@ struct MainPage: View {
                     isPregressionTask.toggle()
                     progressValue = 0
                 }
+            }).padding()
+            
+            ButtonView(buttonText: "この課題を諦める", width: 170, color: .red, action: {
+                
             })
             
             Button(action: {
