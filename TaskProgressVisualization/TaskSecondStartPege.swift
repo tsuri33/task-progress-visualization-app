@@ -1,6 +1,7 @@
 import SwiftUI
 import RealmSwift
 // 今後追加
+/*
 struct TaskSecondStartPage: View {
     // タスクが2回目以降の時に表示するビュー
     
@@ -44,4 +45,4 @@ struct TaskSecondStartPage_Previews: PreviewProvider {
     }
 }
 
-
+*/
