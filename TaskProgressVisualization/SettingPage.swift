@@ -10,7 +10,7 @@ struct SettingPage: View {
     @Binding var amountTask:Int
     @Binding var amountToAdvancePerDay:Int
     @Binding var selectionDate:Date
-    @Binding var numberDoTask:Int
+//    @Binding var numberDoTask:Int
     
     @Binding var progressValue:Double
     
@@ -18,7 +18,7 @@ struct SettingPage: View {
         if isProgressionTask {
             VStack {
                 Text("設定").font(.largeTitle).padding()
-                TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask)
+                TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate)
                 
                 ButtonView(buttonText: "現在進行中のタスクを終了する", width: 280, color: .red, action: {
                     isAlert = true
@@ -48,6 +48,6 @@ struct SettingPage: View {
 
 struct SettingPage_Previews: PreviewProvider {
     static var previews: some View {
-        SettingPage(isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(1), progressValue: .constant(1.0) )
+        SettingPage(isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), progressValue: .constant(1.0) )
     }
 }

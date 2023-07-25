@@ -10,13 +10,13 @@ struct TaskStartPage: View {
     @Binding var amountTask:Int
     @Binding var amountToAdvancePerDay:Int
     @Binding var selectionDate:Date
-    @Binding var numberDoTask:Int
+//    @Binding var numberDoTask:Int
     
     @Binding var storeFirstDifferenceOfDate:Int
     
     var body: some View {
         VStack {
-            TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask)
+            TaskStartSettingView(taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate)
             ButtonView(buttonText: "このタスクを開始する！", width: 220, color: .blue, action: {
                 
                 if self.taskName == "" || self.amountTask == 0 || self.amountToAdvancePerDay == 0 {
@@ -51,6 +51,6 @@ struct TaskStartPage: View {
 
 struct TaskStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), numberDoTask: .constant(0), storeFirstDifferenceOfDate: .constant(100))
+        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), storeFirstDifferenceOfDate: .constant(100))
     }
 }

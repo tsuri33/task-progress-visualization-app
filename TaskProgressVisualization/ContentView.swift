@@ -14,7 +14,7 @@ struct ContentView: View {
     @State  var amountTask = 1
     @State  var amountToAdvancePerDay = 1
     @State  var selectionDate = Date()
-    @State  var numberDoTask = 0
+//    @State  var numberDoTask = 0
     
     @State var differenceOfDate = 0
     @State var storeFirstDifferenceOfDate = 0
@@ -23,7 +23,7 @@ struct ContentView: View {
         
         TabView(selection: $selection) {
             if !isProgressionTask {
-                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
                     .tabItem() {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
@@ -33,7 +33,7 @@ struct ContentView: View {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             }
-            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, numberDoTask: self.$numberDoTask, progressValue: self.$progressValue)
+            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
                 .tabItem() {
                     Label("設定", systemImage: "gearshape")
                 }.tag(2)

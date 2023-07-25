@@ -64,7 +64,7 @@ struct TaskStartSettingView: View {
     @State var taskUnits = ["ページ", "問", "個"]
     @State var selectedUnits = 0
     @Binding var selectionDate:Date
-    @Binding var numberDoTask:Int
+//    @Binding var numberDoTask:Int
     
     var body: some View {
         VStack {
@@ -108,10 +108,6 @@ struct TaskStartSettingView: View {
                     HStack {
                         Text("終わらせたい日：")
                         DatePicker("", selection: $selectionDate, in: Date()..., displayedComponents: .date)
-                    }.padding()
-                    
-                    HStack {
-                        Text("\(numberDoTask)回目")
                     }.padding()
                     
                 }
