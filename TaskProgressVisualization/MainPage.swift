@@ -5,7 +5,9 @@ struct MainPage: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
     @Binding var progressValue:Double
-    @Binding var isPregressionTask:Bool
+    @Binding var isProgressionTask:Bool
+    
+    @State private var isAlert = false
     
     @Binding var taskName:String
     @Binding var amountTask:Int
@@ -57,14 +59,30 @@ struct MainPage: View {
                 }
                 
                 if progressValue >= 1 {
-                    isPregressionTask.toggle()
+                    isProgressionTask.toggle()
                     progressValue = 0
                 }
             }).padding()
             
             ButtonView(buttonText: "この課題を諦める", width: 170, color: .red, action: {
-                
+                isAlert = true
             })
+            .alert(isPresented: $isAlert) {
+                Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
+                    isProgressionTask = false
+                    progressValue = 0.0
+                    // データベース削除
+                    let realm = try! Realm()
+                    let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
+                    do {
+                        try realm.write {
+                            realm.delete(taskData)
+                        }
+                    } catch {
+                        print("データベース削除エラー")
+                    }
+                }))
+            }
             
             Button(action: {
                 let realm = try! Realm()
@@ -98,6 +116,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isPregressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
     }
 }

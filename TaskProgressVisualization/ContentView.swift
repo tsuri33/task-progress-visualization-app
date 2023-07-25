@@ -28,7 +28,7 @@ struct ContentView: View {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             } else {
-                MainPage(progressValue: self.$progressValue, isPregressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
                     .tabItem() {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
