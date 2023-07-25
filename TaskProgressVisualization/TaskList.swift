@@ -53,6 +53,7 @@ struct TaskList: View {
                         }
                         .tint(.red)
                     }
+                    /*
                     .swipeActions(edge: .leading) {
                         Button {
                             // 2回目以降のタスク開始画面
@@ -62,9 +63,12 @@ struct TaskList: View {
                             Image(systemName: "play")
                         }
                         .tint(.green)
-                    }.sheet(isPresented: $showingSecondModal) {
+                    }
+                    2回目以降のタスク開始ページ
+                    .sheet(isPresented: $showingSecondModal) {
                         TaskSecondStartPage(taskName: self.$taskName, amountTask: self.$amountTask)
                     }
+                     */
                 }
             }
             .padding(.bottom)
