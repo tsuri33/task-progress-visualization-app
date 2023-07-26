@@ -20,26 +20,27 @@ struct MainPage: View {
     var body: some View {
         VStack {
             ZStack {
-                Rectangle()
-                    .stroke(lineWidth: 2)
-                    .frame(width: frameWidth-30, height: 50)
                 Text("\(taskName)").font(.title)
             }
             ZStack {
                 // 外円
                 CircularProgressBar(progress: $progressValue, color: .blue, selectionDate: self.$selectionDate)
-                    .frame(width: frameWidth, height: frameWidth-100)
+                    .frame(width: frameWidth, height: frameWidth-130)
                     .padding()
                 // 内円
                 var daysLeftsRatio = Double(differenceOfDate) / Double(storeFirstDifferenceOfDate)
                 CircularProgressBar(progress: Binding<Double>(get: { Double(daysLeftsRatio) }, set: { daysLeftsRatio = Double($0) }), color: .red, selectionDate: self.$selectionDate)
-                    .frame(width: frameWidth,height: frameWidth-210)
+                    .frame(width: frameWidth,height: frameWidth-230)
             }.padding()
             
             HStack {
-                Text("達成率").font(.title3)
-                Text("\(Int(progressValue*100))").font(.largeTitle)
-                Text("%").font(.title3)
+                HStack {
+                    Text("達成率").font(.title3)
+                    Text("\(Int(progressValue*100))").font(.largeTitle)
+                    Text("%").font(.title3)
+                    Text("|").font(.title)
+                    Text("残り\(Int(Double(amountTask)*(1.0-progressValue)))")
+                }
             }
             
             ButtonView(buttonText: "今日の分クリア！", width: 170, color: Color.blue, action: {
