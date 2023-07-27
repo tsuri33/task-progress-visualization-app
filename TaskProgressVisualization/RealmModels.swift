@@ -9,7 +9,9 @@ class Task: Object {
     @Persisted var lastDate:Date
 }
 
-class Data: Object {
-    @Persisted var daysLeftsRatio:Double
-    @Persisted var differenceOfDate:Int
+class ProgressingTask: Object {
+    @Persisted var name:String
+    @Persisted var amountTask:Int
+    @Persisted var amountToAdvancePerDay:Int
+    @Persisted var lastDate:Date
 }
