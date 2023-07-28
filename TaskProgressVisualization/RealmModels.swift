@@ -8,10 +8,3 @@ class Task: Object {
     @Persisted var amountToAdvancePerDay:Int
     @Persisted var lastDate:Date
 }
-
-class ProgressingTask: Object {
-    @Persisted var name:String
-    @Persisted var amountTask:Int
-    @Persisted var amountToAdvancePerDay:Int
-    @Persisted var lastDate:Date
-}
