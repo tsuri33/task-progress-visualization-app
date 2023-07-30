@@ -14,6 +14,7 @@ struct SettingPage: View {
     
     @Binding var progressValue:Double
     
+    // データベースと連動させる
     var body: some View {
         if isProgressionTask {
             VStack {
