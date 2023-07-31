@@ -44,7 +44,7 @@ struct MainPage: View {
             }
             
             ButtonView(buttonText: "今日の分クリア！", width: 170, color: Color.blue, action: {
-                // 小数点のズレを修正
+                // 小数点のズレを修正(double)
                 let raitoPerDay = Double(amountToAdvancePerDay) / Double(amountTask)
                 progressValue += raitoPerDay
                 print(Double(storeFirstDifferenceOfDate))
