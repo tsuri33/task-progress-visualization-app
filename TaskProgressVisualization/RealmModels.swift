@@ -7,4 +7,5 @@ class Task: Object {
     @Persisted var amountTask:Int
     @Persisted var amountToAdvancePerDay:Int
     @Persisted var lastDate:Date
+    @Persisted var FirstDifferenceOfDate:Int
 }

@@ -106,14 +106,14 @@ struct MainPage: View {
 //                Text("データベース削除")
 //            }).padding()
 //
-//            Button(action: {
-//                if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-//                    try! FileManager.default.removeItem(at: fileURL)
-//                }
-//            }, label: {
-//                Text("アプリ内からデータベースファイルごと削除")
-//            }).padding()
-//
+            Button(action: {
+                if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+                    try! FileManager.default.removeItem(at: fileURL)
+                }
+            }, label: {
+                Text("アプリ内からデータベースファイルごと削除")
+            }).padding()
+
         }
     }
 }
