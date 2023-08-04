@@ -11,8 +11,8 @@ struct ContentView: View {
     }
     
     @State  var taskName = ""
-    @State  var amountTask = 1
-    @State  var amountToAdvancePerDay = 1
+    @State  var taskAmount = 1
+    @State  var taskAmountToAdvancePerDay = 1
     @State  var selectionDate = Date()
 //    @State  var numberDoTask = 0
     
@@ -23,17 +23,17 @@ struct ContentView: View {
         
         TabView(selection: $selection) {
             if !isProgressionTask {
-                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
                     .tabItem() {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             } else {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
                     .tabItem() {
                         Label("タスク", systemImage: "note.text")
                     }.tag(1)
             }
-            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, amountTask: self.$amountTask, amountToAdvancePerDay: self.$amountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
+            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
                 .tabItem() {
                     Label("設定", systemImage: "gearshape")
                 }.tag(2)

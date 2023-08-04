@@ -10,8 +10,8 @@ struct MainPage: View {
     @State private var isAlert = false
     
     @Binding var taskName:String
-    @Binding var amountTask:Int
-    @Binding var amountToAdvancePerDay:Int
+    @Binding var taskAmount:Int
+    @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
     
     @Binding var differenceOfDate:Int
@@ -39,14 +39,14 @@ struct MainPage: View {
                     Text("\(Int(progressValue*100))").font(.largeTitle)
                     Text("%").font(.title3)
                     Text("|").font(.title)
-                    Text("残り\(Int(Double(amountTask)*(1.0-progressValue)))")
+                    Text("残り\(Int(Double(taskAmount)*(1.0-progressValue)))")
                 }
             }
             
             VStack {
                 ButtonView(buttonText: "今日の分クリア！", width: 170, color: Color.blue, action: {
                     // 小数点のズレを修正(double)
-                    let raitoPerDay = Double(amountToAdvancePerDay) / Double(amountTask)
+                    let raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
                     progressValue += raitoPerDay
                     print(Double(storeFirstDifferenceOfDate))
                     print(progressValue)
@@ -120,6 +120,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), amountTask: .constant(10), amountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
     }
 }

@@ -59,8 +59,8 @@ struct ButtonView: View {
 struct TaskStartSettingView: View {
     
     @Binding var taskName:String
-    @Binding var amountTask:Int
-    @Binding var amountToAdvancePerDay:Int
+    @Binding var taskAmount:Int
+    @Binding var taskAmountToAdvancePerDay:Int
     @State var taskUnits = ["ページ", "問", "個"]
     @State var selectedUnits = 0
     @Binding var selectionDate:Date
@@ -78,7 +78,7 @@ struct TaskStartSettingView: View {
                     
                     HStack {
                         Text("タスクの量：")
-                        TextField("1", value: $amountTask, format: .number)
+                        TextField("1", value: $taskAmount, format: .number)
                             .multilineTextAlignment(TextAlignment.trailing)
                         Picker(selection: $selectedUnits, label: Text("")) {
                             ForEach(taskUnits.indices, id: \.self) { unitsIndex in
@@ -89,8 +89,8 @@ struct TaskStartSettingView: View {
                     
                     HStack {
                         Text("1日に進める量：")
-                        Picker("", selection: $amountToAdvancePerDay) {
-                            ForEach(0...amountTask, id: \.self) { value in
+                        Picker("", selection: $taskAmountToAdvancePerDay) {
+                            ForEach(0...taskAmount, id: \.self) { value in
                                 Text("\(value)")
                             }
                         }
