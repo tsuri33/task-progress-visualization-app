@@ -39,8 +39,8 @@ struct TaskStartPage: View {
                         print("Realm 初期化エラー: \(error.localizedDescription)")
                     }
                     
-                    let firstDifferenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
-                    storeFirstDifferenceOfDate = firstDifferenceOfDate
+                    let period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+                    task.period = period
                     isProgressionTask = true
                 }
             }).alert(isPresented: self.$isAlert) {
