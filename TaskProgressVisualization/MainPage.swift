@@ -25,6 +25,7 @@ struct MainPage: View {
                 task.name = taskName
                 task.amount = taskAmount
                 task.amountToAdvancePerDay = taskAmountToAdvancePerDay
+                task.raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
             }) {
                 Image(systemName: "restart.circle")
                     .resizable()
@@ -70,7 +71,6 @@ struct MainPage: View {
                         do {
                             try realm.write {
                                 taskData.setValue(Date(), forKey: "lastDate")
-                                taskData.setValue($taskAmountToAdvancePerDay, forKey: "completedAmount")
                             }
                         } catch {
                             print("データベース更新エラー")
@@ -105,6 +105,7 @@ struct MainPage: View {
                 
                             Button(action: {
                                 let realm = try! Realm()
+                                print(Realm.Configuration.defaultConfiguration.fileURL!)
                                 let taskTable = realm.objects(Task.self)
                                 print(taskTable)
                             }, label: {

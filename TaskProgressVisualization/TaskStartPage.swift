@@ -10,9 +10,9 @@ struct TaskStartPage: View {
     @Binding var taskAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
+    @Binding var period:Int
+//    @Binding var ratioPerDay:Double
 //    @Binding var numberDoTask:Int
-    
-    @Binding var storeFirstDifferenceOfDate:Int
     
     var body: some View {
         VStack {
@@ -28,10 +28,10 @@ struct TaskStartPage: View {
                     task.amount = taskAmount
                     task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                     task.lastDate = Date()
-                    let period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
-                    task.period = period
-                    let raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
-                    task.raitoPerDay = raitoPerDay
+//                    period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+//                    task.period = period
+//                    raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
+//                    task.raitoPerDay = raitoPerDay
                     
                     // 保存
                     do {
@@ -53,6 +53,6 @@ struct TaskStartPage: View {
 
 struct TaskStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), storeFirstDifferenceOfDate: .constant(100))
+        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
     }
 }

@@ -14,9 +14,8 @@ struct TaskList: View {
     @Binding var taskAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
+    @Binding var period:Int
 //    @Binding var numberDoTask:Int
-    
-    @Binding var storeFirstDifferenceOfDate:Int
     
     var body: some View {
         VStack {
@@ -76,7 +75,7 @@ struct TaskList: View {
             ButtonView(buttonText: "新しいタスクを開始する！", width: 250, color: .blue, action: {
                 self.showingModal.toggle()
             }).sheet(isPresented: $showingModal) {
-                TaskStartPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
+                TaskStartPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
             }
         }
     }
@@ -84,6 +83,6 @@ struct TaskList: View {
 
 struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
-        TaskList(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), storeFirstDifferenceOfDate: .constant(100))
+        TaskList(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
     }
 }

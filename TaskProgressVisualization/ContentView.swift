@@ -6,14 +6,16 @@ struct ContentView: View {
     @AppStorage("isProgressionTask") var isProgressionTask = false
     @AppStorage("progressValue") var progressValue = 0.0
     
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor.quaternaryLabel
-    }
+//    init() {
+//        UITabBar.appearance().backgroundColor = UIColor.quaternaryLabel
+//    }
     
-    @State  var taskName = ""
-    @State  var taskAmount = 1
-    @State  var taskAmountToAdvancePerDay = 1
-    @State  var selectionDate = Date()
+    @State var taskName = ""
+    @State var taskAmount = 1
+    @State var taskAmountToAdvancePerDay = 1
+    @State var selectionDate = Date()
+    @State var period = 0
+    @State var ratioPerDay = 0.0
 //    @State  var numberDoTask = 0
     
     @State var differenceOfDate = 0
@@ -23,20 +25,20 @@ struct ContentView: View {
         
         TabView(selection: $selection) {
             if !isProgressionTask {
-                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
-                    .tabItem() {
-                        Label("タスク", systemImage: "note.text")
-                    }.tag(1)
+                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+//                    .tabItem() {
+//                        Label("タスク", systemImage: "note.text")
+//                    }.tag(1)
             } else {
                 MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, differenceOfDate: self.$differenceOfDate, storeFirstDifferenceOfDate: self.$storeFirstDifferenceOfDate)
-                    .tabItem() {
-                        Label("タスク", systemImage: "note.text")
-                    }.tag(1)
+//                    .tabItem() {
+//                        Label("タスク", systemImage: "note.text")
+//                    }.tag(1)
             }
-            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
-                .tabItem() {
-                    Label("設定", systemImage: "gearshape")
-                }.tag(2)
+//            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
+//                .tabItem() {
+//                    Label("設定", systemImage: "gearshape")
+//                }.tag(2)
         }
     }
 }
