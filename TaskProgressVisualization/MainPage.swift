@@ -21,7 +21,10 @@ struct MainPage: View {
         
         ZStack(alignment: .topTrailing) {
             Button(action: {
-                
+                let task = Task()
+                task.name = taskName
+                task.amount = taskAmount
+                task.amountToAdvancePerDay = taskAmountToAdvancePerDay
             }) {
                 Image(systemName: "restart.circle")
                     .resizable()
@@ -67,6 +70,7 @@ struct MainPage: View {
                         do {
                             try realm.write {
                                 taskData.setValue(Date(), forKey: "lastDate")
+                                taskData.setValue($taskAmountToAdvancePerDay, forKey: "completedAmount")
                             }
                         } catch {
                             print("データベース更新エラー")
@@ -87,10 +91,10 @@ struct MainPage: View {
                             progressValue = 0.0
                             // データベース削除
                             let realm = try! Realm()
-                            let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
+                            let taskDelete = realm.objects(Task.self).filter("name == '\(taskName)'")
                             do {
                                 try realm.write {
-                                    realm.delete(taskData)
+                                    realm.delete(taskDelete)
                                 }
                             } catch {
                                 print("データベース削除エラー")
@@ -99,13 +103,13 @@ struct MainPage: View {
                     }
                 }
                 
-                //            Button(action: {
-                //                let realm = try! Realm()
-                //                let taskTable = realm.objects(Task.self)
-                //                print(taskTable)
-                //            }, label: {
-                //                Text("データベース取得")
-                //            }).padding()
+                            Button(action: {
+                                let realm = try! Realm()
+                                let taskTable = realm.objects(Task.self)
+                                print(taskTable)
+                            }, label: {
+                                Text("データベース取得")
+                            }).padding()
                 //
                 //            Button(action: {
                 //                let realm = try! Realm()
