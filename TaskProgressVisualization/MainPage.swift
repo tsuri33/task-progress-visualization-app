@@ -4,7 +4,7 @@ import RealmSwift
 struct MainPage: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
-    @Binding var progressValue:Double
+    @Binding var progressValue:NSDecimalNumber
     @Binding var isProgressionTask:Bool
     
     @State private var isAlert = false
@@ -13,25 +13,13 @@ struct MainPage: View {
     @Binding var taskAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
+    @Binding var period:Int
     
     @Binding var differenceOfDate:Int
-    @Binding var storeFirstDifferenceOfDate:Int
     
     var body: some View {
         
         ZStack(alignment: .topTrailing) {
-            Button(action: {
-                let task = Task()
-                task.name = taskName
-                task.amount = taskAmount
-                task.amountToAdvancePerDay = taskAmountToAdvancePerDay
-                task.raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
-            }) {
-                Image(systemName: "restart.circle")
-                    .resizable()
-                    .foregroundColor(.black)
-                    .frame(width: 40, height: 40)
-            }.padding(.trailing, 50)
             
             VStack {
                 
@@ -43,8 +31,8 @@ struct MainPage: View {
                         .frame(width: frameWidth, height: frameWidth-130)
                         .padding()
                     // 内円
-                    var daysLeftsRatio = Double(differenceOfDate) / Double(storeFirstDifferenceOfDate)
-                    CircularProgressBar(progress: Binding<Double>(get: { Double(daysLeftsRatio) }, set: { daysLeftsRatio = Double($0) }), color: .red, selectionDate: self.$selectionDate)
+                    var daysLeftsRatio:NSDecimalNumber = NSDecimalNumber(value: Double(differenceOfDate) / Double(period))
+                    CircularProgressBar(progress: Binding<NSDecimalNumber>(get: { NSDecimalNumber(value: Double(daysLeftsRatio)) }, set: { daysLeftsRatio = NSDecimalNumber(value: Double(truncating: $0)) }), color: .red, selectionDate: self.$selectionDate)
                         .frame(width: frameWidth,height: frameWidth-230)
                 }.padding()
                 
@@ -63,7 +51,7 @@ struct MainPage: View {
                         // 小数点のズレを修正(double)
                         let raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
                         progressValue += raitoPerDay
-                        print(Double(storeFirstDifferenceOfDate))
+                        print(Double(period))
                         print(progressValue)
                         
                         let realm = try! Realm()
@@ -136,6 +124,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), differenceOfDate: .constant(1), storeFirstDifferenceOfDate: .constant(1))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
     }
 }

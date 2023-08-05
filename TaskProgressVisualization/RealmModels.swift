@@ -9,5 +9,5 @@ class Task: Object {
     @Persisted var amountToAdvancePerDay:Int
     @Persisted var lastDate:Date
     @Persisted var period:Int
-    @Persisted var raitoPerDay:Double
+    @Persisted var ratioPerDay:Double
 }

@@ -11,7 +11,7 @@ struct TaskStartPage: View {
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
     @Binding var period:Int
-//    @Binding var ratioPerDay:Double
+    @Binding var ratioPerDay:Double
 //    @Binding var numberDoTask:Int
     
     var body: some View {
@@ -28,10 +28,10 @@ struct TaskStartPage: View {
                     task.amount = taskAmount
                     task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                     task.lastDate = Date()
-//                    period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
-//                    task.period = period
-//                    raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
-//                    task.raitoPerDay = raitoPerDay
+                    period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+                    task.period = period
+                    ratioPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
+                    task.ratioPerDay = ratioPerDay
                     
                     // 保存
                     do {
@@ -53,6 +53,6 @@ struct TaskStartPage: View {
 
 struct TaskStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
+        TaskStartPage(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), ratioPerDay: .constant(2))
     }
 }
