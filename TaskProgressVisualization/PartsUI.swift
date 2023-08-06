@@ -3,7 +3,7 @@ import RealmSwift
 
 struct CircularProgressBar: View {
     
-    @Binding var progress:NSDecimalNumber
+    @Binding var progress:Double
     var color: Color
     @State var differenceOfDate = 0
     
@@ -18,7 +18,7 @@ struct CircularProgressBar: View {
                 .foregroundColor(color)
             // 進捗度を表す円
             Circle()
-                .trim(from: 0.0, to: min(CGFloat(truncating: progress), 1.0))
+                .trim(from: 0.0, to: min(progress, 1.0))
                 .stroke(style: StrokeStyle(lineWidth: 35, lineCap: .round, lineJoin: .round))
                 .foregroundColor(color)
                 .rotationEffect(Angle(degrees: 270.0))

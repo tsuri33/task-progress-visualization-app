@@ -4,7 +4,7 @@ import RealmSwift
 struct MainPage: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
-    @Binding var progressValue:NSDecimalNumber
+    @Binding var progressValue:Double
     @Binding var isProgressionTask:Bool
     
     @State private var isAlert = false
@@ -32,7 +32,7 @@ struct MainPage: View {
                         .padding()
                     // 内円
                     var daysLeftsRatio:NSDecimalNumber = NSDecimalNumber(value: Double(differenceOfDate) / Double(period))
-                    CircularProgressBar(progress: Binding<NSDecimalNumber>(get: { NSDecimalNumber(value: Double(daysLeftsRatio)) }, set: { daysLeftsRatio = NSDecimalNumber(value: Double(truncating: $0)) }), color: .red, selectionDate: self.$selectionDate)
+                    CircularProgressBar(progress: Binding<Double>(get: { Double( truncating: daysLeftsRatio) }, set: { daysLeftsRatio = NSDecimalNumber(value: Double($0)) }), color: .red, selectionDate: self.$selectionDate)
                         .frame(width: frameWidth,height: frameWidth-230)
                 }.padding()
                 
