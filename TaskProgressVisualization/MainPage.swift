@@ -17,6 +17,10 @@ struct MainPage: View {
     
     @Binding var differenceOfDate:Int
     
+    var daysLeftsRatio: Double {
+        return Double(differenceOfDate) / Double(period)
+    }
+    
     var body: some View {
         
         ZStack(alignment: .topTrailing) {
@@ -31,9 +35,15 @@ struct MainPage: View {
                         .frame(width: frameWidth, height: frameWidth-130)
                         .padding()
                     // 内円
-                    var daysLeftsRatio:NSDecimalNumber = NSDecimalNumber(value: Double(differenceOfDate) / Double(period))
-                    CircularProgressBar(progress: Binding<Double>(get: { Double( truncating: daysLeftsRatio) }, set: { daysLeftsRatio = NSDecimalNumber(value: Double($0)) }), color: .red, selectionDate: self.$selectionDate)
-                        .frame(width: frameWidth,height: frameWidth-230)
+                    CircularProgressBar(progress: Binding<Double>(
+                            get: { self.daysLeftsRatio },
+                            set: { newValue in
+                                let calculatedDifferenceOfDate = Int(Double(self.period) * newValue)
+                                self.differenceOfDate = calculatedDifferenceOfDate
+                            }
+                        ), color: .red, selectionDate: self.$selectionDate)
+                        .frame(width: frameWidth, height: frameWidth - 230)
+
                 }.padding()
                 
                 HStack {
