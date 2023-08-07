@@ -11,6 +11,7 @@ struct MainPage: View {
     
     @Binding var taskName:String
     @Binding var taskAmount:Int
+    @Binding var taskCompletedAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
     @Binding var period:Int
@@ -49,20 +50,22 @@ struct MainPage: View {
                 HStack {
                     HStack {
                         Text("達成率").font(.title3)
-                        Text("\(Int(progressValue*100))").font(.largeTitle)
+                        Text("\(taskCompletedAmount*100/taskAmount)")
+                            .font(.largeTitle)
                         Text("%").font(.title3)
                         Text("|").font(.title)
-                        Text("残り\(Int(Double(taskAmount)*(1.0-progressValue)))")
+                        Text("残り\(taskAmount-taskCompletedAmount)")
                     }
                 }
                 
                 VStack {
                     ButtonView(buttonText: "今日の分クリア！", width: 180, color: Color.blue, action: {
-                        // 小数点のズレを修正(double)
-                        let raitoPerDay = Double(taskAmountToAdvancePerDay) / Double(taskAmount)
-                        progressValue += raitoPerDay
+                        let raitoPerDay = Decimal(taskAmountToAdvancePerDay) / Decimal(taskAmount)
+                        let newProgressDecimal = min(Decimal(progressValue) + raitoPerDay, 1.0)
+                        progressValue = Double(truncating: newProgressDecimal as NSNumber)
                         print(Double(period))
                         print(progressValue)
+                        taskCompletedAmount += taskAmountToAdvancePerDay
                         
                         let realm = try! Realm()
                         let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
@@ -101,15 +104,15 @@ struct MainPage: View {
                     }
                 }
                 
-                            Button(action: {
-                                let realm = try! Realm()
-                                print(Realm.Configuration.defaultConfiguration.fileURL!)
-                                let taskTable = realm.objects(Task.self)
-                                print(taskTable)
-                            }, label: {
-                                Text("データベース取得")
-                            }).padding()
-                //
+                Button(action: {
+                    let realm = try! Realm()
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    let taskTable = realm.objects(Task.self)
+                    print(taskTable)
+                }, label: {
+                    Text("データベース取得")
+                }).padding()
+                
                 //            Button(action: {
                 //                let realm = try! Realm()
                 //                try! realm.write {
@@ -134,6 +137,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(50), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
     }
 }
