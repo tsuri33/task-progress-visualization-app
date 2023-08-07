@@ -25,9 +25,9 @@ struct CircularProgressBar: View {
             VStack {
 //                var differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
                 Text("残り").font(.title)
-                Text("\(differenceOfDate)日").font(.largeTitle)
+                Text("\(differenceOfDate+1)日").font(.largeTitle)
             }.onAppear {
-                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
+                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
             }
         }
     }

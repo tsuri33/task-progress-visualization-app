@@ -15,6 +15,7 @@ struct MainPage: View {
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
     @Binding var period:Int
+    @State var daysLeftRatio = 0.0
     
     @Binding var differenceOfDate:Int
     
@@ -36,13 +37,7 @@ struct MainPage: View {
                         .frame(width: frameWidth, height: frameWidth-130)
                         .padding()
                     // 内円
-                    CircularProgressBar(progress: Binding<Double>(
-                            get: { self.daysLeftsRatio },
-                            set: { newValue in
-                                let calculatedDifferenceOfDate = Int(Double(self.period) * newValue)
-                                self.differenceOfDate = calculatedDifferenceOfDate
-                            }
-                        ), color: .red, selectionDate: self.$selectionDate)
+                    CircularProgressBar(progress: $daysLeftRatio, color: .red, selectionDate: self.$selectionDate)
                         .frame(width: frameWidth, height: frameWidth - 230)
 
                 }.padding()
@@ -130,12 +125,18 @@ struct MainPage: View {
                     Text("アプリ内からデータベースファイルごと削除")
                 }).padding()
             }
+        }.onAppear {
+            if selectionDate == Date() {
+                daysLeftRatio = 1.0
+            } else {
+                daysLeftRatio = 1.0 - Double(differenceOfDate*100/period)/100
+            }
         }
     }
 }
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), differenceOfDate: .constant(10))
     }
 }
