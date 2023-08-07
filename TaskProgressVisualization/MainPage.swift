@@ -60,12 +60,10 @@ struct MainPage: View {
                 
                 VStack {
                     ButtonView(buttonText: "今日の分クリア！", width: 180, color: Color.blue, action: {
-                        let raitoPerDay = Decimal(taskAmountToAdvancePerDay) / Decimal(taskAmount)
-                        let newProgressDecimal = min(Decimal(progressValue) + raitoPerDay, 1.0)
-                        progressValue = Double(truncating: newProgressDecimal as NSNumber)
-                        print(Double(period))
-                        print(progressValue)
+                        
                         taskCompletedAmount += taskAmountToAdvancePerDay
+                        progressValue = Double(taskCompletedAmount*100/taskAmount)/100
+                        print(progressValue)
                         
                         let realm = try! Realm()
                         let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
@@ -79,7 +77,7 @@ struct MainPage: View {
                         
                         if taskAmount <= taskCompletedAmount {
                             isProgressionTask.toggle()
-                            progressValue = 0
+                            progressValue = 0.0
                             taskCompletedAmount = 0
                         }
                     }).padding()
@@ -138,6 +136,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(50), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10), differenceOfDate: .constant(10))
     }
 }

@@ -16,7 +16,6 @@ struct ContentView: View {
     @State var taskAmountToAdvancePerDay = 1
     @State var selectionDate = Date()
     @State var period = 0
-    @State var ratioPerDay = 0.0
 //    @State  var numberDoTask = 0
     
     @State var differenceOfDate = 0
@@ -25,7 +24,7 @@ struct ContentView: View {
         
         TabView(selection: $selection) {
             if !isProgressionTask {
-                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, ratioPerDay: self.$ratioPerDay)
+                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
 //                    .tabItem() {
 //                        Label("タスク", systemImage: "note.text")
 //                    }.tag(1)
