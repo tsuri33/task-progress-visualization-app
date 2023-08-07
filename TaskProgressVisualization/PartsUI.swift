@@ -27,7 +27,7 @@ struct CircularProgressBar: View {
                 Text("残り").font(.title)
                 Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
-                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
             }
         }
     }
