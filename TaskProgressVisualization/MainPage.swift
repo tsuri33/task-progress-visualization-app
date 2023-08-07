@@ -77,7 +77,7 @@ struct MainPage: View {
                             print("データベース更新エラー")
                         }
                         
-                        if progressValue >= 1 {
+                        if taskAmount == taskCompletedAmount {
                             isProgressionTask.toggle()
                             progressValue = 0
                         }
