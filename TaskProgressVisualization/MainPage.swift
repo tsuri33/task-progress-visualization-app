@@ -77,9 +77,10 @@ struct MainPage: View {
                             print("データベース更新エラー")
                         }
                         
-                        if taskAmount == taskCompletedAmount {
+                        if taskAmount <= taskCompletedAmount {
                             isProgressionTask.toggle()
                             progressValue = 0
+                            taskCompletedAmount = 0
                         }
                     }).padding()
                     
