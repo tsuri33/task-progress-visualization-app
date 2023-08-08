@@ -15,7 +15,7 @@ struct MainPage: View {
     @Binding var taskAmountToAdvancePerDay:Int
     @Binding var selectionDate:Date
     @Binding var period:Int
-    @State var daysLeftRatio = 0.0
+    @Binding var daysLeftRatio:Double
     
     @Binding var differenceOfDate:Int
     
@@ -23,17 +23,32 @@ struct MainPage: View {
         
         ZStack(alignment: .topTrailing) {
             
+            Button(action: {
+                if differenceOfDate >= 0 {
+                    daysLeftRatio = Double(differenceOfDate*100 / period)/100
+                } else {
+                    daysLeftRatio = 1.0
+                }
+                print(differenceOfDate)
+                print(daysLeftRatio)
+            }, label: {
+                Image(systemName: "restart.circle")
+                    .resizable()
+                    .frame(width: 40, height: 40)
+                    .foregroundColor(.black)
+            }).padding(.trailing, 60.0)
+            
             VStack {
                 
                 Text("\(taskName)").font(.title)
                 
                 ZStack {
                     // 外円
-                    CircularProgressBar(progress: $progressValue, color: .blue, selectionDate: self.$selectionDate)
-                        .frame(width: frameWidth, height: frameWidth-130)
+                    CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                        .frame(width: frameWidth, height: frameWidth - 130)
                         .padding()
                     // 内円
-                    CircularProgressBar(progress: $daysLeftRatio, color: .red, selectionDate: self.$selectionDate)
+                    CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
                         .frame(width: frameWidth, height: frameWidth - 230)
 
                 }.padding()
@@ -54,7 +69,6 @@ struct MainPage: View {
                         
                         taskCompletedAmount += taskAmountToAdvancePerDay
                         progressValue = Double(taskCompletedAmount*100/taskAmount)/100
-                        print(progressValue)
                         
                         let realm = try! Realm()
                         let taskData = realm.objects(Task.self).filter("name == '\(taskName)'")
@@ -71,6 +85,9 @@ struct MainPage: View {
                             progressValue = 0.0
                             taskCompletedAmount = 0
                         }
+                        
+                        print(progressValue)
+                        print(daysLeftRatio)
                     }).padding()
                     
                     ButtonView(buttonText: "このタスクをやめる", width: 180, color: .red, action: {
@@ -127,6 +144,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), differenceOfDate: .constant(10))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6), differenceOfDate: .constant(10))
     }
 }

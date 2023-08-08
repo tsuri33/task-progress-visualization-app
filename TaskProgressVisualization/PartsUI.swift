@@ -6,8 +6,9 @@ struct CircularProgressBar: View {
     @Binding var progress:Double
     var color: Color
     @State var differenceOfDate = 0
-    
+    @Binding var period:Int
     @Binding var selectionDate:Date
+    @Binding var daysLeftRatio:Double
     
     var body: some View {
         ZStack {
@@ -23,11 +24,10 @@ struct CircularProgressBar: View {
                 .foregroundColor(color)
                 .rotationEffect(Angle(degrees: 270.0))
             VStack {
-//                var differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
                 Text("残り").font(.title)
-                Text("\(differenceOfDate+1)日").font(.largeTitle)
+                Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
-                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24))
+                differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
             }
         }
     }
