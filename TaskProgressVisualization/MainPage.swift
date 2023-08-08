@@ -19,10 +19,6 @@ struct MainPage: View {
     
     @Binding var differenceOfDate:Int
     
-    var daysLeftsRatio: Double {
-        return Double(differenceOfDate) / Double(period)
-    }
-    
     var body: some View {
         
         ZStack(alignment: .topTrailing) {
@@ -124,12 +120,6 @@ struct MainPage: View {
                 }, label: {
                     Text("アプリ内からデータベースファイルごと削除")
                 }).padding()
-            }
-        }.onAppear {
-            if selectionDate == Date() {
-                daysLeftRatio = 1.0
-            } else {
-                daysLeftRatio = 1.0 - Double(differenceOfDate*100/period)/100
             }
         }
     }
