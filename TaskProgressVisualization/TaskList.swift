@@ -22,6 +22,7 @@ struct TaskList: View {
             Text("完了タスク一覧")
                 .font(.largeTitle)
                 .padding(.bottom)
+            Text("達成タスク数：\(tasks.count)個").font(.title3)
             List {
                 ForEach(0 ..< tasks.count, id: \.self) { index in
                     HStack {
