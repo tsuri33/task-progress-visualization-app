@@ -31,12 +31,14 @@ struct TaskStartPage: View {
                     task.period = period
                     let taskSelectionDate = TaskSelectionDate()
                     taskSelectionDate.selectionDate = selectionDate
+                    print(selectionDate)
                     
                     // 保存
                     do {
                         let realm = try Realm()
                         try! realm.write {
                             realm.add(task)
+                            realm.add(taskSelectionDate)
                         }
                     } catch let error as NSError {
                         print("Realm 初期化エラー: \(error.localizedDescription)")

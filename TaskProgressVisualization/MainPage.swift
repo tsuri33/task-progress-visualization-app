@@ -21,6 +21,10 @@ struct MainPage: View {
     
     var body: some View {
         
+        let realm = try! Realm()
+        let taskDelete = realm.objects(Task.self).filter("name == '\(taskName)'")
+        let taskSelectionDate = realm.objects(TaskSelectionDate.self)
+        
         ZStack(alignment: .topTrailing) {
             
             Button(action: {
@@ -84,10 +88,15 @@ struct MainPage: View {
                             isProgressionTask.toggle()
                             progressValue = 0.0
                             taskCompletedAmount = 0
+                            // データベース削除
+                            do {
+                                try realm.write {
+                                    realm.delete(taskSelectionDate)
+                                }
+                            } catch {
+                                print("データベース削除エラー")
+                            }
                         }
-                        
-                        print(progressValue)
-                        print(daysLeftRatio)
                     }).padding()
                     
                     ButtonView(buttonText: "このタスクをやめる", width: 180, color: .red, action: {
@@ -98,9 +107,6 @@ struct MainPage: View {
                             isProgressionTask = false
                             progressValue = 0.0
                             // データベース削除
-                            let realm = try! Realm()
-                            let taskDelete = realm.objects(Task.self).filter("name == '\(taskName)'")
-                            let taskSelectionDate = realm.objects(TaskSelectionDate.self)
                             do {
                                 try realm.write {
                                     realm.delete(taskDelete)
@@ -116,22 +122,12 @@ struct MainPage: View {
                 Button(action: {
                     let realm = try! Realm()
                     print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    let taskTable = realm.objects(Task.self)
+                    let taskTable = realm.objects(TaskSelectionDate.self)
                     print(taskTable)
                 }, label: {
                     Text("データベース取得")
                 }).padding()
                 
-                //            Button(action: {
-                //                let realm = try! Realm()
-                //                try! realm.write {
-                //                    let taskTable = realm.objects(Task.self)
-                //                    realm.delete(taskTable)
-                //                }
-                //            }, label: {
-                //                Text("データベース削除")
-                //            }).padding()
-                //
                 Button(action: {
                     if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
                         try! FileManager.default.removeItem(at: fileURL)

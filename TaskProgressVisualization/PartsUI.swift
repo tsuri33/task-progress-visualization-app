@@ -31,8 +31,8 @@ struct CircularProgressBar: View {
                 let taskSelectionDate = TaskSelectionDate()
                 selectionDate = taskSelectionDate.selectionDate
                 differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
-                print(daysLeftRatio)
-                print(selectionDate)
+//                print(daysLeftRatio)
+//                print(selectionDate)
             }
         }
     }
