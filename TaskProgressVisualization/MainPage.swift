@@ -17,15 +17,15 @@ struct MainPage: View {
     @Binding var period:Int
     @Binding var daysLeftRatio:Double
     
-    @Binding var differenceOfDate:Int
+    @AppStorage("rateOfAchievement") var rateOfAchievement = 0
     
     var body: some View {
         
         let realm = try! Realm()
-        let taskDelete = realm.objects(Task.self).filter("name == '\(taskName)'")
+        let nowTask = realm.objects(Task.self).filter("name == '\(taskName)'")
         let taskSelectionDate = realm.objects(TaskSelectionDate.self)
         
-        ZStack(alignment: .topTrailing) {
+        ZStack {
             
             VStack {
                 
@@ -45,7 +45,7 @@ struct MainPage: View {
                 HStack {
                     HStack {
                         Text("達成率").font(.title3)
-                        Text("\(taskCompletedAmount*100/taskAmount)")
+                        Text("\(rateOfAchievement)")
                             .font(.largeTitle)
                         Text("%").font(.title3)
                         Text("|").font(.title)
@@ -69,6 +69,7 @@ struct MainPage: View {
                             print("データベース更新エラー")
                         }
                         
+                        // タスク終了時の処理
                         if taskAmount <= taskCompletedAmount {
                             isProgressionTask.toggle()
                             progressValue = 0.0
@@ -91,10 +92,11 @@ struct MainPage: View {
                         Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
                             isProgressionTask = false
                             progressValue = 0.0
+                            taskCompletedAmount = 0
                             // データベース削除
                             do {
                                 try realm.write {
-                                    realm.delete(taskDelete)
+                                    realm.delete(nowTask)
                                     realm.delete(taskSelectionDate)
                                 }
                             } catch {
@@ -121,12 +123,17 @@ struct MainPage: View {
                     Text("アプリ内からデータベースファイルごと削除")
                 }).padding()
             }
+        }.onAppear {
+            if let nowTaskFirst = nowTask.first {
+                taskAmount = nowTaskFirst.amount
+                rateOfAchievement = taskCompletedAmount * 100 / taskAmount
+            }
         }
     }
 }
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6), differenceOfDate: .constant(10))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6))
     }
 }

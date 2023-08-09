@@ -10,13 +10,13 @@ struct ContentView: View {
 //        UITabBar.appearance().backgroundColor = UIColor.quaternaryLabel
 //    }
     
-    @State var taskName = ""
+    @AppStorage("taskName") var taskName = ""
     @State var taskAmount = 1
-    @State var taskCompletedAmount = 0
+    @AppStorage("taskCompletedAmount") var taskCompletedAmount = 0
     @State var taskAmountToAdvancePerDay = 1
     @AppStorage("period") var period = 0
     @State var selectionDate = Date()
-    @State var daysLeftRatio = 0.0
+    @AppStorage("daysLeftRatio") var daysLeftRatio = 0.0
 //    @State  var numberDoTask = 0
     
     @State var differenceOfDate = 0
@@ -30,7 +30,7 @@ struct ContentView: View {
 //                        Label("タスク", systemImage: "note.text")
 //                    }.tag(1)
             } else {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, differenceOfDate: self.$differenceOfDate)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio)
 //                    .tabItem() {
 //                        Label("タスク", systemImage: "note.text")
 //                    }.tag(1)
