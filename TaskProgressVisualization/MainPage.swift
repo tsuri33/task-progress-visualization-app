@@ -27,21 +27,6 @@ struct MainPage: View {
         
         ZStack(alignment: .topTrailing) {
             
-            Button(action: {
-                if differenceOfDate >= 0 {
-                    daysLeftRatio = Double(differenceOfDate*100 / period)/100
-                } else {
-                    daysLeftRatio = 1.0
-                }
-                print(differenceOfDate)
-                print(daysLeftRatio)
-            }, label: {
-                Image(systemName: "restart.circle")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.black)
-            }).padding(.trailing, 60.0)
-            
             VStack {
                 
                 Text("\(taskName)").font(.title)

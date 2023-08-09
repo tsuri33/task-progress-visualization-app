@@ -33,7 +33,7 @@ struct CircularProgressBar: View {
                 let taskSelectionDate = realm.objects(TaskSelectionDate.self)
                 selectionDate = taskSelectionDate[0].selectionDate
                 differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
-                print(daysLeftRatio)
+                daysLeftRatio = 1.0 - Double(differenceOfDate * 100 / period) / 100
             }
         }
     }

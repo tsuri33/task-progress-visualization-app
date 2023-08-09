@@ -31,7 +31,6 @@ struct TaskStartPage: View {
                     task.period = period
                     let taskSelectionDate = TaskSelectionDate()
                     taskSelectionDate.selectionDate = selectionDate
-                    
                     // 保存
                     do {
                         let realm = try Realm()
