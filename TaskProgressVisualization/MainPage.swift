@@ -100,9 +100,11 @@ struct MainPage: View {
                             // データベース削除
                             let realm = try! Realm()
                             let taskDelete = realm.objects(Task.self).filter("name == '\(taskName)'")
+                            let taskSelectionDate = realm.objects(TaskSelectionDate.self)
                             do {
                                 try realm.write {
                                     realm.delete(taskDelete)
+                                    realm.delete(taskSelectionDate)
                                 }
                             } catch {
                                 print("データベース削除エラー")

@@ -28,6 +28,8 @@ struct CircularProgressBar: View {
                 // 日付表示修正の必要あり
                 Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
+                let taskSelectionDate = TaskSelectionDate()
+                selectionDate = taskSelectionDate.selectionDate
                 differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
                 print(daysLeftRatio)
                 print(selectionDate)
