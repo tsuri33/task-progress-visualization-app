@@ -5,7 +5,7 @@ struct CircularProgressBar: View {
     
     @Binding var progress:Double
     var color: Color
-    @State var differenceOfDate = 0
+    @AppStorage("differenceOfDate") var differenceOfDate = 0
     @Binding var period:Int
     @Binding var selectionDate:Date
     @Binding var daysLeftRatio:Double
@@ -29,6 +29,8 @@ struct CircularProgressBar: View {
                 Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
                 differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
+                print(daysLeftRatio)
+                print(selectionDate)
             }
         }
     }

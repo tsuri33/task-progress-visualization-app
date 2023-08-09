@@ -9,3 +9,7 @@ class Task: Object {
     @Persisted var lastDate:Date
     @Persisted var period:Int
 }
+
+class TaskSelectionDate: Object {
+    @Persisted var selectionDate:Date
+}

@@ -14,8 +14,8 @@ struct ContentView: View {
     @State var taskAmount = 1
     @State var taskCompletedAmount = 0
     @State var taskAmountToAdvancePerDay = 1
+    @AppStorage("period") var period = 0
     @State var selectionDate = Date()
-    @State var period = 0
     @State var daysLeftRatio = 0.0
 //    @State  var numberDoTask = 0
     

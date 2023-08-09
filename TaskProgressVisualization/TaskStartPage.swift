@@ -29,6 +29,8 @@ struct TaskStartPage: View {
                     task.lastDate = Date()
                     period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
                     task.period = period
+                    let taskSelectionDate = TaskSelectionDate()
+                    taskSelectionDate.selectionDate = selectionDate
                     
                     // 保存
                     do {
@@ -40,8 +42,6 @@ struct TaskStartPage: View {
                         print("Realm 初期化エラー: \(error.localizedDescription)")
                     }
                     isProgressionTask = true
-                    
-                    print(period)
                 }
             }).alert(isPresented: self.$isAlert) {
                 Alert(title: Text("全ての項目を入力してください"), dismissButton: .default(Text("OK")))
