@@ -121,7 +121,7 @@ struct MainPage: View {
                 
                 Button(action: {
                     let realm = try! Realm()
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
                     let taskTable = realm.objects(TaskSelectionDate.self)
                     print(taskTable)
                 }, label: {
