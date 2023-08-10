@@ -11,7 +11,7 @@ struct ContentView: View {
 //    }
     
     @AppStorage("taskName") var taskName = ""
-    @State var taskAmount = 1
+    @AppStorage("taskAmount") var taskAmount = 1
     @AppStorage("taskCompletedAmount") var taskCompletedAmount = 0
     @State var taskAmountToAdvancePerDay = 1
     @AppStorage("period") var period = 0
