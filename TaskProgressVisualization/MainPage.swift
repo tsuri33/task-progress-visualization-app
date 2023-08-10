@@ -77,6 +77,7 @@ struct MainPage: View {
                             isProgressionTask.toggle()
                             progressValue = 0.0
                             taskCompletedAmount = 0
+                            rateOfAchievement = 0
                             // データベース削除
                             do {
                                 try realm.write {
@@ -96,6 +97,7 @@ struct MainPage: View {
                             isProgressionTask = false
                             progressValue = 0.0
                             taskCompletedAmount = 0
+                            rateOfAchievement = 0
                             // データベース削除
                             do {
                                 try realm.write {
