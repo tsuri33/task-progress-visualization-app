@@ -29,32 +29,34 @@ struct MainPage: View {
             
             VStack {
                 
-                Text("\(taskName)").font(.title)
-                
-                ZStack {
-                    // 外円
-                    CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
-                        .frame(width: frameWidth, height: frameWidth - 130)
-                        .padding()
-                    // 内円
-                    CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
-                        .frame(width: frameWidth, height: frameWidth - 230)
-
-                }.padding()
-                
-                HStack {
+                VStack {
+                    Text("\(taskName)").font(.title)
+                    
+                    ZStack {
+                        // 外円
+                        CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                            .frame(width: frameWidth, height: frameWidth - 130)
+                            .padding()
+                        // 内円
+                        CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                            .frame(width: frameWidth, height: frameWidth - 230)
+                        
+                    }.padding()
+                    
                     HStack {
-                        Text("達成率").font(.title3)
-                        Text("\(rateOfAchievement)")
-                            .font(.largeTitle)
-                        Text("%").font(.title3)
-                        Text("|").font(.title)
-                        Text("残り\(taskAmount-taskCompletedAmount)")
+                        HStack {
+                            Text("達成率").font(.title3)
+                            Text("\(rateOfAchievement)")
+                                .font(.largeTitle)
+                            Text("%").font(.title3)
+                            Text("|").font(.title)
+                            Text("残り\(taskAmount-taskCompletedAmount)")
+                        }
                     }
-                }
+                }.padding(.bottom, 70)
                 
                 VStack {
-                    ButtonView(buttonText: "今日の分クリア！", width: 180, color: Color.blue, action: {
+                    ButtonView(buttonText: "今日の分クリア！", width: 200, color: Color.blue, action: {
                         
                         taskCompletedAmount += taskAmountToAdvancePerDay
                         rateOfAchievement = taskCompletedAmount * 100 / taskAmount
@@ -86,7 +88,7 @@ struct MainPage: View {
                         }
                     }).padding()
                     
-                    ButtonView(buttonText: "このタスクをやめる", width: 180, color: .red, action: {
+                    ButtonView(buttonText: "このタスクをやめる", width: 200, color: .red, action: {
                         isAlert = true
                     })
                     .alert(isPresented: $isAlert) {
@@ -107,22 +109,22 @@ struct MainPage: View {
                     }
                 }
                 
-                Button(action: {
-                    let realm = try! Realm()
+//                Button(action: {
+//                    let realm = try! Realm()
 //                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    let taskTable = realm.objects(TaskSelectionDate.self)
-                    print(taskTable)
-                }, label: {
-                    Text("データベース取得")
-                }).padding()
+//                    let taskTable = realm.objects(TaskSelectionDate.self)
+//                    print(taskTable)
+//                }, label: {
+//                    Text("データベース取得")
+//                }).padding()
                 
-                Button(action: {
-                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-                        try! FileManager.default.removeItem(at: fileURL)
-                    }
-                }, label: {
-                    Text("アプリ内からデータベースファイルごと削除")
-                }).padding()
+//                Button(action: {
+//                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+//                        try! FileManager.default.removeItem(at: fileURL)
+//                    }
+//                }, label: {
+//                    Text("アプリ内からデータベースファイルごと削除")
+//                }).padding()
             }
         }.onAppear {
             if let nowTaskFirst = nowTask.first {
