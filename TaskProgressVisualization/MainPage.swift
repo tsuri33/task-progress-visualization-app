@@ -57,6 +57,7 @@ struct MainPage: View {
                     ButtonView(buttonText: "今日の分クリア！", width: 180, color: Color.blue, action: {
                         
                         taskCompletedAmount += taskAmountToAdvancePerDay
+                        rateOfAchievement = taskCompletedAmount * 100 / taskAmount
                         progressValue = Double(taskCompletedAmount*100/taskAmount)/100
                         
                         let realm = try! Realm()
@@ -126,7 +127,6 @@ struct MainPage: View {
         }.onAppear {
             if let nowTaskFirst = nowTask.first {
                 taskAmount = nowTaskFirst.amount
-                rateOfAchievement = taskCompletedAmount * 100 / taskAmount
             }
         }
     }
