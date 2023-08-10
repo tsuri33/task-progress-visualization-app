@@ -38,13 +38,15 @@ struct TaskList: View {
                         Button {
                             // データベース削除
                             let realm = try! Realm()
-                            let taskData = realm.objects(Task.self).filter("name == '\(tasks[index].name)'")
-                            do {
-                                try realm.write {
-                                    realm.delete(taskData)
+                            let taskIdToDelete = tasks[index].id
+                            if let taskDelete = realm.object(ofType: Task.self, forPrimaryKey: taskIdToDelete) {
+                                do {
+                                    try realm.write {
+                                        realm.delete(taskDelete)
+                                    }
+                                } catch {
+                                    print("データベース削除エラー")
                                 }
-                            } catch {
-                                print("データベース削除エラー")
                             }
                             tasks = realm.objects(Task.self)
                         } label: {
