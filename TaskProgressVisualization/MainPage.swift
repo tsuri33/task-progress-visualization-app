@@ -35,11 +35,11 @@ struct MainPage: View {
                 rateOfAchievement = taskCompletedAmount * 100 / taskAmount
                 progressValue = Double(taskCompletedAmount*100/taskAmount)/100
             }, label: {
-                Image(systemName: "gobackward")
+                Image(systemName: "gobackward.minus")
                     .resizable()
                     .frame(width: 35, height: 35)
-                    .foregroundColor(.black)
-            }).padding(.trailing, 60.0)
+//                    .foregroundColor(.black)
+            }).padding(.trailing, 65.0)
             
             VStack {
                 
