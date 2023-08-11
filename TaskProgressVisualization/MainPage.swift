@@ -61,27 +61,33 @@ struct MainPage: View {
                         taskCompletedAmount += taskAmountToAdvancePerDay
                         rateOfAchievement = taskCompletedAmount * 100 / taskAmount
                         progressValue = Double(taskCompletedAmount*100/taskAmount)/100
-                        ForEach(0 ..< tasks.count, id: \.self) { index in
-//                        for index in 0 ..< tasks.count {
-                            let taskId = tasks[index].id
-                            if let nowTask = realm.object(ofType: Task.self, forPrimaryKey: taskId) {
-                                do {
-                                    try realm.write {
-                                        nowTask.setValue(Date(), forKey: "lastDate")
-                                    }
-                                } catch {
-                                    print("データベース更新エラー")
-                                }
-                            }
-                        }
                         
                         // タスク終了時の処理
                         if taskAmount <= taskCompletedAmount {
+                            // レコード生成
+                            let task = Task()
+                            task.name = taskName
+                            task.amount = taskAmount
+                            task.amountToAdvancePerDay = taskAmountToAdvancePerDay
+                            task.lastDate = Date()
+                            period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
+                            task.period = period
+                            // 保存
+                            do {
+                                let realm = try Realm()
+                                try! realm.write {
+                                    realm.add(task)
+                                }
+                            } catch let error as NSError {
+                                print("Realm 初期化エラー: \(error.localizedDescription)")
+                            }
+                            
                             isProgressionTask.toggle()
                             progressValue = 0.0
                             taskAmount = 1
                             taskCompletedAmount = 0
                             rateOfAchievement = 0
+                            
                             if let selectionDateToDelete = taskSelectionDate.first {
                                 do {
                                     try realm.write {
@@ -104,21 +110,7 @@ struct MainPage: View {
                             taskAmount = 1
                             taskCompletedAmount = 0
                             rateOfAchievement = 0
-                            // データ削除
-                            ForEach(0 ..< tasks.count, id: \.self) { index in
-//                            for index in 0 ..< tasks.count {
-                                let taskId = tasks[index].id
-                                if let taskDelete = realm.object(ofType: Task.self, forPrimaryKey: taskId) {
-                                    do {
-                                        try realm.write {
-                                            realm.delete(taskDelete)
-                                        }
-                                    } catch {
-                                        print("データベース削除エラー")
-                                    }
-                                }
-                            }
-                            // ループの外側でtaskSelectionDateを削除
+                            // taskSelectionDateを削除
                             if let selectionDateToDelete = taskSelectionDate.first {
                                 do {
                                     try realm.write {
@@ -132,14 +124,14 @@ struct MainPage: View {
                     }
                 }
                 
-                //                Button(action: {
-                //                    let realm = try! Realm()
-                //                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                //                    let taskTable = realm.objects(TaskSelectionDate.self)
-                //                    print(taskTable)
-                //                }, label: {
-                //                    Text("データベース取得")
-                //                }).padding()
+                                Button(action: {
+                                    let realm = try! Realm()
+                                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                                    let taskTable = realm.objects(Task.self)
+                                    print(taskTable)
+                                }, label: {
+                                    Text("データベース取得")
+                                }).padding()
                 
                                 Button(action: {
                                     if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
