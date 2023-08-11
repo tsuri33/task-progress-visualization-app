@@ -29,9 +29,9 @@ struct CircularProgressBar: View {
                 // 日付表示修正の必要あり
                 Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
-//                let realm = try! Realm()
-//                let taskSelectionDate = realm.objects(TaskSelectionDate.self)
-//                selectionDate = taskSelectionDate[0].selectionDate
+                let realm = try! Realm()
+                let taskSelectionDate = realm.objects(TaskSelectionDate.self)
+                selectionDate = taskSelectionDate[0].selectionDate
                 differenceOfDate = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
                 daysLeftRatio = 1.0 - Double(differenceOfDate * 100 / period) / 100
             }

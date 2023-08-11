@@ -123,22 +123,31 @@ struct MainPage: View {
                     }
                 }
                 
-                                Button(action: {
-                                    let realm = try! Realm()
-                                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                                    let taskTable = realm.objects(Task.self)
-                                    print(taskTable)
-                                }, label: {
-                                    Text("データベース取得")
-                                }).padding()
+                Button(action: {
+                    let realm = try! Realm()
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    let taskTable = realm.objects(Task.self)
+                    print(taskTable)
+                }, label: {
+                    Text("データベース取得:テーブル")
+                })
                 
-                                Button(action: {
-                                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-                                        try! FileManager.default.removeItem(at: fileURL)
-                                    }
-                                }, label: {
-                                    Text("アプリ内からデータベースファイルごと削除")
-                                }).padding()
+                Button(action: {
+                    let realm = try! Realm()
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    let taskS = realm.objects(TaskSelectionDate.self)
+                    print(taskS)
+                }, label: {
+                    Text("データベース取得:日付")
+                })
+                
+//                Button(action: {
+//                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
+//                        try! FileManager.default.removeItem(at: fileURL)
+//                    }
+//                }, label: {
+//                    Text("アプリ内からデータベースファイルごと削除")
+//                }).padding()
             }
         }
     }
