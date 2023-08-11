@@ -70,7 +70,6 @@ struct MainPage: View {
                             task.amount = taskAmount
                             task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                             task.lastDate = Date()
-                            period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
                             task.period = period
                             // 保存
                             do {

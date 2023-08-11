@@ -21,7 +21,7 @@ struct TaskStartPage: View {
                 if self.taskName == "" || self.taskAmount == 0 || self.taskAmountToAdvancePerDay == 0 {
                     self.isAlert.toggle()
                 } else {
-                    isProgressionTask = true
+                    period = Int(selectionDate.timeIntervalSince(Date()) / (60 * 60 * 24)) + 1
                     let taskSelectionDate = TaskSelectionDate()
                     taskSelectionDate.selectionDate = selectionDate
                     // 保存
@@ -33,6 +33,7 @@ struct TaskStartPage: View {
                     } catch let error as NSError {
                         print("Realm 初期化エラー: \(error.localizedDescription)")
                     }
+                    isProgressionTask = true
                 }
             }).alert(isPresented: self.$isAlert) {
                 Alert(title: Text("全ての項目を入力してください"), dismissButton: .default(Text("OK")))
