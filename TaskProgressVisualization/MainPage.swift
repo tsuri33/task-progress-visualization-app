@@ -25,7 +25,21 @@ struct MainPage: View {
         let realm = try! Realm()
         let taskSelectionDate = realm.objects(TaskSelectionDate.self)
         
-        ZStack {
+        ZStack(alignment: .topTrailing) {
+            
+            Button(action: {
+                taskCompletedAmount -= taskAmountToAdvancePerDay
+                if taskCompletedAmount < 0 {
+                    taskCompletedAmount = 0
+                }
+                rateOfAchievement = taskCompletedAmount * 100 / taskAmount
+                progressValue = Double(taskCompletedAmount*100/taskAmount)/100
+            }, label: {
+                Image(systemName: "gobackward")
+                    .resizable()
+                    .frame(width: 35, height: 35)
+                    .foregroundColor(.black)
+            }).padding(.trailing, 60.0)
             
             VStack {
                 
@@ -123,23 +137,23 @@ struct MainPage: View {
                     }
                 }
                 
-                Button(action: {
-                    let realm = try! Realm()
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    let taskTable = realm.objects(Task.self)
-                    print(taskTable)
-                }, label: {
-                    Text("データベース取得:テーブル")
-                })
-                
-                Button(action: {
-                    let realm = try! Realm()
-                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-                    let taskS = realm.objects(TaskSelectionDate.self)
-                    print(taskS)
-                }, label: {
-                    Text("データベース取得:日付")
-                })
+//                Button(action: {
+//                    let realm = try! Realm()
+//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+//                    let taskTable = realm.objects(Task.self)
+//                    print(taskTable)
+//                }, label: {
+//                    Text("データベース取得:テーブル")
+//                })
+//
+//                Button(action: {
+//                    let realm = try! Realm()
+//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+//                    let taskS = realm.objects(TaskSelectionDate.self)
+//                    print(taskS)
+//                }, label: {
+//                    Text("データベース取得:日付")
+//                })
                 
 //                Button(action: {
 //                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
