@@ -8,8 +8,6 @@ struct MainPage: View {
     @Binding var isProgressionTask:Bool
     @State private var isAlert = false
     
-    @State private var tasks: Results<Task> = try! Realm().objects(Task.self)
-    
     @Binding var taskName:String
     @Binding var taskAmount:Int
     @Binding var taskCompletedAmount:Int
@@ -85,6 +83,7 @@ struct MainPage: View {
                             task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                             task.lastDate = Date()
                             task.period = period
+//                            task.numberDoTask += 1
                             // 保存
                             do {
                                 let realm = try Realm()
