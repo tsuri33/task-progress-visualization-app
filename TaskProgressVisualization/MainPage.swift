@@ -42,8 +42,10 @@ struct MainPage: View {
             VStack {
                 
                 VStack {
-                    Text("\(taskName)").font(.title)
-                    
+                    Text("\(taskName)")
+                        .font(.title)
+                        .padding()
+                    Text("1日に進める量：\(taskAmountToAdvancePerDay)")
                     ZStack {
                         // 外円
                         CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
