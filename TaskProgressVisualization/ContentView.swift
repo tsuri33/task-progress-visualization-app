@@ -18,7 +18,7 @@ struct ContentView: View {
     @AppStorage("period") var period = 0
     @State var selectionDate = Date()
     @AppStorage("daysLeftRatio") var daysLeftRatio = 0.0
-//    @State  var numberDoTask = 0
+    @AppStorage("numberDoTask") var numberDoTask = 0
     
     @State var differenceOfDate = 0
     
@@ -31,7 +31,7 @@ struct ContentView: View {
 //                        Label("タスク", systemImage: "note.text")
 //                    }.tag(1)
             } else {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
 //                    .tabItem() {
 //                        Label("タスク", systemImage: "note.text")
 //                    }.tag(1)

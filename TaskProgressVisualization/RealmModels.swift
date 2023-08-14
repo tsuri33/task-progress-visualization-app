@@ -8,7 +8,7 @@ class Task: Object {
     @Persisted var amountToAdvancePerDay:Int
     @Persisted var lastDate:Date
     @Persisted var period:Int
-//    @Persisted var numberDoTask:Int
+    @Persisted var numberDoTask:Int
 }
 
 class TaskSelectionDate: Object {

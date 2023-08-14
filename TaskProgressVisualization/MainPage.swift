@@ -15,6 +15,7 @@ struct MainPage: View {
     @Binding var selectionDate:Date
     @Binding var period:Int
     @Binding var daysLeftRatio:Double
+    @Binding var numberDoTask:Int
     
     @AppStorage("rateOfAchievement") var rateOfAchievement = 0
     
@@ -73,7 +74,7 @@ struct MainPage: View {
                             Text("残り\(taskAmount-taskCompletedAmount)")
                         }
                     }
-                }.padding(.bottom, 70)
+                }.padding(.bottom, 50)
                 
                 VStack {
                     ButtonView(buttonText: "今日の分クリア！", width: 200, color: Color.blue, action: {
@@ -91,7 +92,7 @@ struct MainPage: View {
                             task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                             task.lastDate = Date()
                             task.period = period
-//                            task.numberDoTask += 1
+                            task.numberDoTask = numberDoTask + 1
                             // 保存
                             do {
                                 let realm = try Realm()
@@ -105,6 +106,7 @@ struct MainPage: View {
                             isProgressionTask.toggle()
                             progressValue = 0.0
                             taskAmount = 1
+                            taskAmountToAdvancePerDay = 1
                             taskCompletedAmount = 0
                             rateOfAchievement = 0
                             
@@ -128,6 +130,7 @@ struct MainPage: View {
                             isProgressionTask = false
                             progressValue = 0.0
                             taskAmount = 1
+                            taskAmountToAdvancePerDay = 1
                             taskCompletedAmount = 0
                             rateOfAchievement = 0
                             // taskSelectionDateを削除
@@ -152,6 +155,7 @@ struct MainPage: View {
 //                }, label: {
 //                    Text("データベース取得:テーブル")
 //                })
+                
 //
 //                Button(action: {
 //                    let realm = try! Realm()
@@ -176,6 +180,6 @@ struct MainPage: View {
 
 struct MainPage_Previews: PreviewProvider {
     static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6))
+        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6), numberDoTask: .constant(0))
     }
 }
