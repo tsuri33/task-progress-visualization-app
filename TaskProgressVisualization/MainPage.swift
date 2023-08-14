@@ -45,7 +45,13 @@ struct MainPage: View {
                     Text("\(taskName)")
                         .font(.title)
                         .padding()
-                    Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)")
+                    if taskCompletedAmount + taskAmountToAdvancePerDay > taskAmount {
+                        Text("次の目標：\(taskAmount)")
+                            .font(.title3)
+                    } else {
+                        Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)")
+                            .font(.title3)
+                    }
                     ZStack {
                         // 外円
                         CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
