@@ -46,7 +46,7 @@ struct MainPage: View {
                         .font(.title)
                         .padding()
                     if taskCompletedAmount + taskAmountToAdvancePerDay > taskAmount {
-                        Text("次の目標：\(taskAmount)")
+                        Text("次の目標：\(taskAmount)まで")
                             .font(.title3)
                     } else {
                         Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)")

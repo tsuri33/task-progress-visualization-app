@@ -26,7 +26,6 @@ struct CircularProgressBar: View {
                 .rotationEffect(Angle(degrees: 270.0))
             VStack {
                 Text("残り").font(.title)
-                // 日付表示修正の必要あり
                 Text("\(differenceOfDate)日").font(.largeTitle)
             }.onAppear {
 //                let realm = try! Realm()
