@@ -94,7 +94,7 @@ struct TaskStartSettingView: View {
                     
                     HStack {
                         Text("1日に進める量：")
-                        Picker("", selection: $taskAmountToAdvancePerDay) {
+                        Picker("1", selection: $taskAmountToAdvancePerDay) {
                             ForEach(0...taskAmount, id: \.self) { value in
                                 Text("\(value)")
                             }
