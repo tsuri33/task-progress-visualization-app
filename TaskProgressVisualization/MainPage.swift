@@ -36,7 +36,7 @@ struct MainPage: View {
                 Image(systemName: "gobackward.minus")
                     .resizable()
                     .frame(width: 35, height: 35)
-//                    .foregroundColor(.black)
+                    .foregroundColor(.black)
             }).padding(.trailing, 65.0)
             
             VStack {
@@ -46,10 +46,10 @@ struct MainPage: View {
                         .font(.title)
                         .padding()
                     if taskCompletedAmount + taskAmountToAdvancePerDay > taskAmount {
-                        Text("次の目標：\(taskAmount)まで")
+                        Text("次の目標：\(taskAmount)  まで")
                             .font(.title3)
                     } else {
-                        Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)")
+                        Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)  まで")
                             .font(.title3)
                     }
                     ZStack {
