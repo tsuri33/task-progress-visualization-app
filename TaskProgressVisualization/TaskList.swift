@@ -7,6 +7,7 @@ struct TaskList: View {
     @State var showingModal = false
     @State var showingSecondModal = false
     @Binding var isProgressionTask:Bool
+    @Binding var selection:Int
     
     @State private var tasks: Results<Task> = try! Realm().objects(Task.self)
     
@@ -74,10 +75,20 @@ struct TaskList: View {
             }
             .padding(.bottom)
             .frame(width: frameWidth, height: 500)
-            ButtonView(buttonText: "新しいタスクを開始する！", width: 250, color: .blue, action: {
-                self.showingModal.toggle()
-            }).sheet(isPresented: $showingModal) {
-                TaskStartPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+            if isProgressionTask {
+                ZStack {
+                    Color.gray.frame(width: 300, height: 50)
+                        .cornerRadius(25)
+                        .shadow(radius: 10)
+                    Text("進行中のタスクを終わらせよう！")
+                        .foregroundColor(.white)
+                }
+            } else {
+                ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
+                    self.showingModal.toggle()
+                }).sheet(isPresented: $showingModal) {
+                    TaskStartPage(isProgressionTask: self.$isProgressionTask, showingModal: self.$showingModal, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+                }
             }
         }
     }
@@ -85,6 +96,6 @@ struct TaskList: View {
 
 struct TaskList_Previews: PreviewProvider {
     static var previews: some View {
-        TaskList(isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
+        TaskList(isProgressionTask: .constant(false), selection: .constant(0), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
     }
 }

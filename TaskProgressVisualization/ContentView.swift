@@ -3,7 +3,7 @@ import RealmSwift
 
 struct ContentView: View {
     
-    @State var selection = 1
+    @State var selection = 0
     @AppStorage("isProgressionTask") var isProgressionTask = false
     @AppStorage("progressValue") var progressValue = 0.0
     
@@ -25,16 +25,24 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $selection) {
-            if !isProgressionTask {
-                TaskList(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
-//                    .tabItem() {
-//                        Label("タスク", systemImage: "note.text")
-//                    }.tag(1)
+            TaskList(isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+                .tabItem() {
+                    Label("リスト", systemImage: "list.bullet.clipboard")
+                }
+                .tag(0)
+            if isProgressionTask {
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
+                    .tabItem() {
+                        Label("メイン", systemImage: "flag.checkered")
+                    }
+                    .tag(1)
+                    .badge("進行中")
             } else {
                 MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
-//                    .tabItem() {
-//                        Label("タスク", systemImage: "note.text")
-//                    }.tag(1)
+                    .tabItem() {
+                        Label("メイン", systemImage: "flag.checkered")
+                    }
+                    .tag(1)
             }
 //            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
 //                .tabItem() {

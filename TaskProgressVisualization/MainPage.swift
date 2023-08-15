@@ -24,156 +24,133 @@ struct MainPage: View {
         let realm = try! Realm()
         let taskSelectionDate = realm.objects(TaskSelectionDate.self)
         
-        ZStack(alignment: .topTrailing) {
+        if isProgressionTask {
             
-            Button(action: {
-                taskCompletedAmount -= taskAmountToAdvancePerDay
-                if taskCompletedAmount < 0 {
-                    taskCompletedAmount = 0
-                }
-                rateOfAchievement = taskCompletedAmount * 100 / taskAmount
-                progressValue = Double(taskCompletedAmount*100/taskAmount)/100
-            }, label: {
-                Image(systemName: "gobackward.minus")
-                    .resizable()
-                    .frame(width: 35, height: 35)
-                    .foregroundColor(.black)
-            }).padding(.trailing, 65.0)
-            
-            VStack {
+            ZStack(alignment: .topTrailing) {
+                
+                Button(action: {
+                    taskCompletedAmount -= taskAmountToAdvancePerDay
+                    if taskCompletedAmount < 0 {
+                        taskCompletedAmount = 0
+                    }
+                    rateOfAchievement = taskCompletedAmount * 100 / taskAmount
+                    progressValue = Double(taskCompletedAmount*100/taskAmount)/100
+                }, label: {
+                    Image(systemName: "gobackward.minus")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                }).padding(.trailing, 75.0)
                 
                 VStack {
-                    Text("\(taskName)")
-                        .font(.title)
-                        .padding()
-                    if taskCompletedAmount + taskAmountToAdvancePerDay > taskAmount {
-                        Text("次の目標：\(taskAmount)  まで")
-                            .font(.title3)
-                    } else {
-                        Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)  まで")
-                            .font(.title3)
-                    }
-                    ZStack {
-                        // 外円
-                        CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
-                            .frame(width: frameWidth, height: frameWidth - 130)
+                    
+                    VStack {
+                        Text("\(taskName)")
+                            .font(.title)
                             .padding()
-                        // 内円
-                        CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
-                            .frame(width: frameWidth, height: frameWidth - 230)
+                        if taskCompletedAmount + taskAmountToAdvancePerDay > taskAmount {
+                            Text("次の目標：\(taskAmount)  まで")
+                                .font(.title3)
+                        } else {
+                            Text("次の目標：\(taskCompletedAmount + taskAmountToAdvancePerDay)  まで")
+                                .font(.title3)
+                        }
+                        ZStack {
+                            // 外円
+                            CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                                .frame(width: frameWidth, height: frameWidth - 130)
+                                .padding()
+                            // 内円
+                            CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                                .frame(width: frameWidth, height: frameWidth - 230)
+                            
+                        }.padding()
                         
-                    }.padding()
-                    
-                    HStack {
                         HStack {
-                            Text("達成率").font(.title3)
-                            Text("\(rateOfAchievement)")
-                                .font(.largeTitle)
-                            Text("%").font(.title3)
-                            Text("|").font(.title)
-                            Text("残り\(taskAmount-taskCompletedAmount)")
-                        }
-                    }
-                }.padding(.bottom, 50)
-                
-                VStack {
-                    ButtonView(buttonText: "今日の分クリア！", width: 200, color: Color.blue, action: {
-                        
-                        taskCompletedAmount += taskAmountToAdvancePerDay
-                        rateOfAchievement = taskCompletedAmount * 100 / taskAmount
-                        progressValue = Double(taskCompletedAmount*100/taskAmount)/100
-                        
-                        // タスク終了時の処理
-                        if taskAmount <= taskCompletedAmount {
-                            // レコード生成
-                            let task = Task()
-                            task.name = taskName
-                            task.amount = taskAmount
-                            task.amountToAdvancePerDay = taskAmountToAdvancePerDay
-                            task.lastDate = Date()
-                            task.period = period
-                            task.numberDoTask = numberDoTask + 1
-                            // 保存
-                            do {
-                                let realm = try Realm()
-                                try! realm.write {
-                                    realm.add(task)
-                                }
-                            } catch let error as NSError {
-                                print("Realm 初期化エラー: \(error.localizedDescription)")
-                            }
-                            
-                            isProgressionTask.toggle()
-                            progressValue = 0.0
-                            taskAmount = 1
-                            taskAmountToAdvancePerDay = 1
-                            taskCompletedAmount = 0
-                            rateOfAchievement = 0
-                            
-                            if let selectionDateToDelete = taskSelectionDate.first {
-                                do {
-                                    try realm.write {
-                                        realm.delete(selectionDateToDelete)
-                                    }
-                                } catch {
-                                    print("データベース削除エラー")
-                                }
+                            HStack {
+                                Text("達成率").font(.title3)
+                                Text("\(rateOfAchievement)")
+                                    .font(.largeTitle)
+                                Text("%").font(.title3)
+                                Text("|").font(.title)
+                                Text("残り\(taskAmount-taskCompletedAmount)")
                             }
                         }
-                    }).padding()
+                    }.padding(.bottom, 50)
                     
-                    ButtonView(buttonText: "このタスクをやめる", width: 200, color: .red, action: {
-                        isAlert = true
-                    })
-                    .alert(isPresented: $isAlert) {
-                        Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
-                            isProgressionTask = false
-                            progressValue = 0.0
-                            taskAmount = 1
-                            taskAmountToAdvancePerDay = 1
-                            taskCompletedAmount = 0
-                            rateOfAchievement = 0
-                            // taskSelectionDateを削除
-                            if let selectionDateToDelete = taskSelectionDate.first {
+                    VStack {
+                        ButtonView(buttonText: "今日の分クリア！", width: 200, color: Color.blue, action: {
+                            
+                            taskCompletedAmount += taskAmountToAdvancePerDay
+                            rateOfAchievement = taskCompletedAmount * 100 / taskAmount
+                            progressValue = Double(taskCompletedAmount*100/taskAmount)/100
+                            
+                            // タスク終了時の処理
+                            if taskAmount <= taskCompletedAmount {
+                                // レコード生成
+                                let task = Task()
+                                task.name = taskName
+                                task.amount = taskAmount
+                                task.amountToAdvancePerDay = taskAmountToAdvancePerDay
+                                task.lastDate = Date()
+                                task.period = period
+                                task.numberDoTask = numberDoTask + 1
+                                // 保存
                                 do {
-                                    try realm.write {
-                                        realm.delete(selectionDateToDelete)
+                                    let realm = try Realm()
+                                    try! realm.write {
+                                        realm.add(task)
                                     }
-                                } catch {
-                                    print("データベース削除エラー")
+                                } catch let error as NSError {
+                                    print("Realm 初期化エラー: \(error.localizedDescription)")
+                                }
+                                
+                                isProgressionTask.toggle()
+                                progressValue = 0.0
+                                taskAmount = 1
+                                taskAmountToAdvancePerDay = 1
+                                taskCompletedAmount = 0
+                                rateOfAchievement = 0
+                                
+                                if let selectionDateToDelete = taskSelectionDate.first {
+                                    do {
+                                        try realm.write {
+                                            realm.delete(selectionDateToDelete)
+                                        }
+                                    } catch {
+                                        print("データベース削除エラー")
+                                    }
                                 }
                             }
-                        }))
+                        }).padding()
+                        
+                        ButtonView(buttonText: "このタスクをやめる", width: 200, color: .red, action: {
+                            isAlert = true
+                        })
+                        .alert(isPresented: $isAlert) {
+                            Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
+                                isProgressionTask = false
+                                progressValue = 0.0
+                                taskAmount = 1
+                                taskAmountToAdvancePerDay = 1
+                                taskCompletedAmount = 0
+                                rateOfAchievement = 0
+                                // taskSelectionDateを削除
+                                if let selectionDateToDelete = taskSelectionDate.first {
+                                    do {
+                                        try realm.write {
+                                            realm.delete(selectionDateToDelete)
+                                        }
+                                    } catch {
+                                        print("データベース削除エラー")
+                                    }
+                                }
+                            }))
+                        }
                     }
                 }
-                
-//                Button(action: {
-//                    let realm = try! Realm()
-//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-//                    let taskTable = realm.objects(Task.self)
-//                    print(taskTable)
-//                }, label: {
-//                    Text("データベース取得:テーブル")
-//                })
-                
-//
-//                Button(action: {
-//                    let realm = try! Realm()
-//                    print(Realm.Configuration.defaultConfiguration.fileURL!)
-//                    let taskS = realm.objects(TaskSelectionDate.self)
-//                    print(taskS)
-//                }, label: {
-//                    Text("データベース取得:日付")
-//                })
-                
-//                Button(action: {
-//                    if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-//                        try! FileManager.default.removeItem(at: fileURL)
-//                    }
-//                }, label: {
-//                    Text("アプリ内からデータベースファイルごと削除")
-//                }).padding()
             }
+        } else {
+            Text("タスクを開始してください！").font(.title)
         }
     }
 }
