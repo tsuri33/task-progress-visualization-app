@@ -31,14 +31,14 @@ struct ContentView: View {
                 }
                 .tag(0)
             if isProgressionTask {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
                     .tabItem() {
                         Label("メイン", systemImage: "flag.checkered")
                     }
                     .tag(1)
                     .badge("進行中")
             } else {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
+                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
                     .tabItem() {
                         Label("メイン", systemImage: "flag.checkered")
                     }

@@ -4,6 +4,8 @@ import RealmSwift
 struct TaskList: View {
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
+    private var frameHeight: CGFloat {UIScreen.main.bounds.height}
+    
     @State var showingModal = false
     @State var showingSecondModal = false
     @Binding var isProgressionTask:Bool
@@ -20,10 +22,12 @@ struct TaskList: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Text("完了タスク一覧")
                 .font(.largeTitle)
-                .padding(.bottom)
+            Spacer()
             Text("達成タスク数：\(tasks.count)個").font(.title3)
+            Spacer()
             List {
                 ForEach(0 ..< tasks.count, id: \.self) { index in
                     HStack {
@@ -73,8 +77,7 @@ struct TaskList: View {
                      */
                 }
             }
-            .padding(.bottom)
-            .frame(width: frameWidth, height: 500)
+            Spacer()
             if isProgressionTask {
                 ZStack {
                     Color.gray.frame(width: 300, height: 50)
@@ -90,6 +93,7 @@ struct TaskList: View {
                     TaskStartPage(isProgressionTask: self.$isProgressionTask, showingModal: self.$showingModal, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
                 }
             }
+            Spacer()
         }
     }
 }
