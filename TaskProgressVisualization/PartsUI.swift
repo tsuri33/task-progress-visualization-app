@@ -66,7 +66,7 @@ struct TaskStartSettingView: View {
     @Binding var taskName:String
     @Binding var taskAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
-    @State var taskUnits = ["ページ", "問", "個"]
+    @State var taskUnits = ["ページ", "問", "個", "章", "枚"]
     @State var selectedUnits = 0
     @Binding var selectionDate:Date
 //    @Binding var numberDoTask:Int
