@@ -24,7 +24,8 @@ struct TaskList: View {
         VStack {
             Spacer()
             Text("完了タスク一覧")
-                .font(.largeTitle)
+                .font(.title)
+                .padding(.top)
             Spacer()
             Text("達成タスク数：\(tasks.count)個").font(.title3)
             Spacer()
@@ -85,7 +86,7 @@ struct TaskList: View {
                         .shadow(radius: 10)
                     Text("進行中のタスクを終わらせよう！")
                         .foregroundColor(.white)
-                }
+                }.padding(.bottom)
             } else {
                 ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
                     self.showingModal.toggle()
