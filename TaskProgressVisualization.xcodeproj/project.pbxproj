@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C2E32D52A8F612200386A40 /* AppVersionMonitorSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5C2E32D42A8F612200386A40 /* AppVersionMonitorSwiftUI */; };
 		5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */; };
 		5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */; };
 		5C99B6032A553B34006597DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6022A553B34006597DE /* ContentView.swift */; };
@@ -44,6 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C99B6122A553BD9006597DE /* RealmSwift in Frameworks */,
+				5C2E32D52A8F612200386A40 /* AppVersionMonitorSwiftUI in Frameworks */,
 				5C99B6102A553BD9006597DE /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,6 +115,7 @@
 			packageProductDependencies = (
 				5C99B60F2A553BD9006597DE /* Realm */,
 				5C99B6112A553BD9006597DE /* RealmSwift */,
+				5C2E32D42A8F612200386A40 /* AppVersionMonitorSwiftUI */,
 			);
 			productName = TaskProgressVisualization;
 			productReference = 5C99B5FD2A553B34006597DE /* TaskProgressVisualization.app */;
@@ -144,6 +147,7 @@
 			mainGroup = 5C99B5F42A553B34006597DE;
 			packageReferences = (
 				5C99B60E2A553BD9006597DE /* XCRemoteSwiftPackageReference "realm-swift" */,
+				5C2E32D32A8F612200386A40 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */,
 			);
 			productRefGroup = 5C99B5FE2A553B34006597DE /* Products */;
 			projectDirPath = "";
@@ -394,6 +398,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5C2E32D32A8F612200386A40 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SNQ-2001/AppVersionMonitorSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 		5C99B60E2A553BD9006597DE /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -405,6 +417,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5C2E32D42A8F612200386A40 /* AppVersionMonitorSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C2E32D32A8F612200386A40 /* XCRemoteSwiftPackageReference "AppVersionMonitorSwiftUI" */;
+			productName = AppVersionMonitorSwiftUI;
+		};
 		5C99B60F2A553BD9006597DE /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5C99B60E2A553BD9006597DE /* XCRemoteSwiftPackageReference "realm-swift" */;

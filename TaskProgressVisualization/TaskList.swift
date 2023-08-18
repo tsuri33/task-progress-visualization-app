@@ -91,7 +91,7 @@ struct TaskList: View {
                     self.showingModal.toggle()
                 }).sheet(isPresented: $showingModal) {
                     TaskStartPage(isProgressionTask: self.$isProgressionTask, showingModal: self.$showingModal, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
-                }
+                }.padding(.bottom)
             }
             Spacer()
         }

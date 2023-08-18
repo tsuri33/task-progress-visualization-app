@@ -1,15 +1,14 @@
 import SwiftUI
 import RealmSwift
+import AppVersionMonitorSwiftUI
 
 struct ContentView: View {
+    
+    @State var isAlert: Bool = false
     
     @State var selection = 0
     @AppStorage("isProgressionTask") var isProgressionTask = false
     @AppStorage("progressValue") var progressValue = 0.0
-    
-//    init() {
-//        UITabBar.appearance().backgroundColor = UIColor.quaternaryLabel
-//    }
     
     @AppStorage("taskName") var taskName = ""
     @AppStorage("taskAmount") var taskAmount = 0
