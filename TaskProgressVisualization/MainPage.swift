@@ -107,7 +107,6 @@ struct MainPage: View {
                                 print("Realm 初期化エラー: \(error.localizedDescription)")
                             }
                             
-                            isProgressionTask.toggle()
                             progressValue = 0.0
                             taskAmount = 1
                             taskAmountToAdvancePerDay = 1
@@ -124,6 +123,7 @@ struct MainPage: View {
                                 }
                             }
                             selection = 0
+                            isProgressionTask = false
                         }
                     }).padding()
                     
@@ -132,12 +132,12 @@ struct MainPage: View {
                     })
                     .alert(isPresented: $isAlert) {
                         Alert(title: Text("今回の記録は失われます"), message: Text("本当にタスクを終了しますか？"), primaryButton: .default(Text("いいえ")), secondaryButton: .default(Text("はい"), action: {
-                            isProgressionTask = false
                             progressValue = 0.0
                             taskAmount = 1
                             taskAmountToAdvancePerDay = 1
                             taskCompletedAmount = 0
                             rateOfAchievement = 0
+                            
                             // taskSelectionDateを削除
                             if let selectionDateToDelete = taskSelectionDate.first {
                                 do {
@@ -148,6 +148,7 @@ struct MainPage: View {
                                     print("データベース削除エラー")
                                 }
                             }
+                            isProgressionTask = false
                             selection = 0
                         }))
                     }
