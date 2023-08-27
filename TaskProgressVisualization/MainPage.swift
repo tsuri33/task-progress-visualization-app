@@ -122,7 +122,6 @@ struct MainPage: View {
                                     print("データベース削除エラー")
                                 }
                             }
-                            selection = 0
                             isProgressionTask = false
                         }
                     }).padding()
@@ -149,7 +148,6 @@ struct MainPage: View {
                                 }
                             }
                             isProgressionTask = false
-                            selection = 0
                         }))
                     }
                     .padding(.bottom, 20)
