@@ -60,11 +60,11 @@ struct MainPage: View {
                     Spacer()
                     ZStack {
                         // 外円
-                        CircularProgressBar(progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                        CircularProgressBar(isProgressionTask: self.$isProgressionTask, progress: $progressValue, color: .blue, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
                             .frame(width: 250, height: 250)
                             .padding()
                         // 内円
-                        CircularProgressBar(progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
+                        CircularProgressBar(isProgressionTask: self.$isProgressionTask, progress: $daysLeftRatio, color: .red, period: self.$period, selectionDate: self.$selectionDate, daysLeftRatio: self.$daysLeftRatio)
                             .frame(width: 150, height: 150)
                         
                     }
@@ -123,6 +123,7 @@ struct MainPage: View {
                                 }
                             }
                             isProgressionTask = false
+                            selection = 0
                         }
                     }).padding()
                     
@@ -148,6 +149,7 @@ struct MainPage: View {
                                 }
                             }
                             isProgressionTask = false
+                            selection = 0
                         }))
                     }
                     .padding(.bottom, 20)
