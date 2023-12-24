@@ -161,8 +161,6 @@ struct MainPage: View {
     }
 }
 
-struct MainPage_Previews: PreviewProvider {
-    static var previews: some View {
-        MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), selection: .constant(1), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6), numberDoTask: .constant(0))
-    }
+#Preview {
+    MainPage(progressValue: .constant(0.5), isProgressionTask: .constant(true), selection: .constant(1), taskName: .constant("数学"), taskAmount: .constant(100), taskCompletedAmount: .constant(20), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(20), daysLeftRatio: .constant(0.6), numberDoTask: .constant(0))
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C2E32D52A8F612200386A40 /* AppVersionMonitorSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5C2E32D42A8F612200386A40 /* AppVersionMonitorSwiftUI */; };
+		5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4229192B38172100F03F7C /* ViewModels.swift */; };
 		5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */; };
 		5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */; };
 		5C99B6032A553B34006597DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6022A553B34006597DE /* ContentView.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C4229192B38172100F03F7C /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		5C65F4382A8AF4FD006B2C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSecondStartPege.swift; sourceTree = "<group>"; };
 		5C99B5FD2A553B34006597DE /* TaskProgressVisualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskProgressVisualization.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,7 @@
 			children = (
 				5C65F4382A8AF4FD006B2C17 /* Info.plist */,
 				5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */,
+				5C4229192B38172100F03F7C /* ViewModels.swift */,
 				5C99B6022A553B34006597DE /* ContentView.swift */,
 				5C99B61B2A553CE4006597DE /* TaskList.swift */,
 				5C99B61D2A553D02006597DE /* TaskStartPage.swift */,
@@ -177,6 +180,7 @@
 			files = (
 				5C99B61C2A553CE4006597DE /* TaskList.swift in Sources */,
 				5C99B6162A553C8C006597DE /* PartsUI.swift in Sources */,
+				5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */,
 				5C99B6032A553B34006597DE /* ContentView.swift in Sources */,
 				5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */,
 				5C99B61E2A553D02006597DE /* TaskStartPage.swift in Sources */,
@@ -327,7 +331,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.yuma.TaskProgressVisualization;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -362,7 +366,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.yuma.TaskProgressVisualization;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
