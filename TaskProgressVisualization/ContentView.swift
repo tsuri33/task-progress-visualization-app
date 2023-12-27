@@ -4,7 +4,6 @@ import RealmSwift
 struct ContentView: View {
     
     @State var selection = 0
-    @AppStorage("isProgressionTask") var isProgressionTask = false
     @AppStorage("progressValue") var progressValue = 0.0
     
     @AppStorage("taskName") var taskName = ""
@@ -21,13 +20,13 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $selection) {
-            TaskListView(viewModel: TaskListViewModel(), isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+            TaskListView(viewModel: TaskListViewModel(), taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
                 .tabItem() {
                     Label("リスト", systemImage: "list.bullet.clipboard")
                 }
                 .tag(0)
             }
-            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
+            SettingPage(taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
                 .tabItem() {
                     Label("設定", systemImage: "gearshape")
                 }

@@ -4,7 +4,6 @@ import RealmSwift
 struct TaskStartPage: View {
     
     @State var isAlert = false
-    @Binding var isProgressionTask:Bool
     @Binding var showingModal:Bool
     
     @Binding var taskName:String
@@ -34,7 +33,6 @@ struct TaskStartPage: View {
                     } catch let error as NSError {
                         print("Realm 初期化エラー: \(error.localizedDescription)")
                     }
-                    isProgressionTask = true
                     showingModal = false
                 }
             }).alert(isPresented: self.$isAlert) {
@@ -46,6 +44,6 @@ struct TaskStartPage: View {
 
 struct TaskStartPage_Previews: PreviewProvider {
     static var previews: some View {
-        TaskStartPage(isProgressionTask: .constant(false), showingModal: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
+        TaskStartPage(showingModal: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
     }
 }
