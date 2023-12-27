@@ -1,10 +1,7 @@
 import SwiftUI
 import RealmSwift
-import AppVersionMonitorSwiftUI
 
 struct ContentView: View {
-    
-    @State var isAlert: Bool = false
     
     @State var selection = 0
     @AppStorage("isProgressionTask") var isProgressionTask = false
@@ -24,54 +21,20 @@ struct ContentView: View {
     var body: some View {
         
         TabView(selection: $selection) {
-            TaskList(isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+            TaskListView(viewModel: TaskListViewModel(), isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
                 .tabItem() {
                     Label("リスト", systemImage: "list.bullet.clipboard")
                 }
                 .tag(0)
-            if isProgressionTask {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
-                    .tabItem() {
-                        Label("メイン", systemImage: "flag.checkered")
-                    }
-                    .tag(1)
-                    .badge("進行中")
-            } else {
-                MainPage(progressValue: self.$progressValue, isProgressionTask: self.$isProgressionTask, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskCompletedAmount: self.$taskCompletedAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period, daysLeftRatio: self.$daysLeftRatio, numberDoTask: self.$numberDoTask)
-                    .tabItem() {
-                        Label("メイン", systemImage: "flag.checkered")
-                    }
-                    .tag(1)
             }
-//            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
-//                .tabItem() {
-//                    Label("設定", systemImage: "gearshape")
-//                }.tag(2)
-        }
-        .alert(isPresented: $isAlert) {
-            Alert(title: Text("お知らせ"), message: Text("最新バージョンがあります"), dismissButton: .default(Text("OK")) {
-                // AppStoreを開く
-                let url = URL(string: "https://apps.apple.com/jp/app/id6461378188")!
-                // URLを開けるかをチェックする
-                if UIApplication.shared.canOpenURL(url) {
-                    // URLを開く
-                    UIApplication.shared.open(url, options: [:])
+            SettingPage(isProgressionTask: self.$isProgressionTask, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, progressValue: self.$progressValue)
+                .tabItem() {
+                    Label("設定", systemImage: "gearshape")
                 }
-            })
-        }
-        .appVersionMonitor(id: 6461378188) { status in
-            switch status {
-            case .updateAvailable:
-                isAlert = true
-                print("アップデートがあります")
-            case .updateUnavailable:
-                print("アップデートがありません")
-            case .failure(let error):
-                print("エラーが発生しました: \(error)")
-            }
+                .tag(1)
         }
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

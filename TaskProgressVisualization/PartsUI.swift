@@ -125,7 +125,7 @@ struct TaskStartSettingView: View {
     }
 }
 
-struct TaskListView: View {
+struct TaskList: View {
     
     var taskName: String
     

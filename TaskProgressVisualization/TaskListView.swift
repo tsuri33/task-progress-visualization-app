@@ -1,7 +1,9 @@
 import SwiftUI
 import RealmSwift
 
-struct TaskList: View {
+struct TaskListView: View {
+    
+    @ObservedObject var viewModel: TaskListViewModel
     
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
     private var frameHeight: CGFloat {UIScreen.main.bounds.height}
@@ -9,7 +11,6 @@ struct TaskList: View {
     @State var showingModal = false
     @State var showingSecondModal = false
     @Binding var isProgressionTask:Bool
-    @Binding var selection:Int
     
     @State private var tasks: Results<Task> = try! Realm().objects(Task.self)
     
@@ -91,7 +92,7 @@ struct TaskList: View {
                 ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
                     self.showingModal.toggle()
                 }).sheet(isPresented: $showingModal) {
-                    TaskStartPage(isProgressionTask: self.$isProgressionTask, showingModal: self.$showingModal, selection: self.$selection, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+                    TaskStartPage(isProgressionTask: self.$isProgressionTask, showingModal: self.$showingModal, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
                 }.padding(.bottom)
             }
             Spacer()
@@ -99,8 +100,6 @@ struct TaskList: View {
     }
 }
 
-struct TaskList_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskList(isProgressionTask: .constant(false), selection: .constant(0), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
-    }
+#Preview {
+    TaskListView(viewModel: TaskListViewModel(), isProgressionTask: .constant(false), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
 }

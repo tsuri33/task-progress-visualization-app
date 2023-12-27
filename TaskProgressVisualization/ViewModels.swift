@@ -1,5 +1,5 @@
 import Foundation
 
-class ContentViewModel: ObservableObject {
+class TaskListViewModel: ObservableObject {
     @Published var isAlert: Bool = false
 }

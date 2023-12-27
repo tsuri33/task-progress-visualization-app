@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "appversionmonitorswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SNQ-2001/AppVersionMonitorSwiftUI",
-      "state" : {
-        "revision" : "5a87c1afac5fe4b63e0cb1f7acb6cbbe2cc9e1c8",
-        "version" : "0.1.1"
-      }
-    },
-    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
