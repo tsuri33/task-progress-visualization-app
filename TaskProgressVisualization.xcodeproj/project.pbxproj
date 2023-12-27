@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C3A274A2B3BBE5A007BA48C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3A27492B3BBE5A007BA48C /* Models.swift */; };
 		5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4229192B38172100F03F7C /* ViewModels.swift */; };
 		5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */; };
 		5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C3A27492B3BBE5A007BA48C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		5C4229192B38172100F03F7C /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		5C65F4382A8AF4FD006B2C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSecondStartPege.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				5C65F4382A8AF4FD006B2C17 /* Info.plist */,
+				5C3A27492B3BBE5A007BA48C /* Models.swift */,
 				5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */,
 				5C4229192B38172100F03F7C /* ViewModels.swift */,
 				5C99B6022A553B34006597DE /* ContentView.swift */,
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C3A274A2B3BBE5A007BA48C /* Models.swift in Sources */,
 				5C99B61C2A553CE4006597DE /* TaskListView.swift in Sources */,
 				5C99B6162A553C8C006597DE /* PartsUI.swift in Sources */,
 				5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */,
