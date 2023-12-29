@@ -9,6 +9,7 @@ class Task: Object, Identifiable {
     @Persisted var lastDate:Date
     @Persisted var period:Int
     @Persisted var numberDoTask:Int
+    @Persisted var isProgressing: Bool
 }
 
 class TaskSelectionDate: Object {
