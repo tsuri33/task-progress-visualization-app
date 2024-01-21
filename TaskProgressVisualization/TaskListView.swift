@@ -9,9 +9,6 @@ struct TaskListView: View {
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
     private var frameHeight: CGFloat {UIScreen.main.bounds.height}
     
-    @State var showingModal = false
-    @State var showingSecondModal = false
-    
     @Binding var taskName:String
     @Binding var taskAmount:Int
     @Binding var taskAmountToAdvancePerDay:Int
@@ -46,28 +43,12 @@ struct TaskListView: View {
                     }
                     .tint(.red)
                 }
-                /*
-                .swipeActions(edge: .leading) {
-                    Button {
-                        // 2回目以降のタスク開始画面
-                        showingSecondModal.toggle()
-                        print(showingSecondModal)
-                    } label: {
-                        Image(systemName: "play")
-                    }
-                    .tint(.green)
-                }
-                2回目以降のタスク開始ページ
-                .sheet(isPresented: $showingSecondModal) {
-                    TaskSecondStartPage(taskName: self.$taskName, amountTask: self.$amountTask)
-                }
-                 */
             }
             Spacer()
             ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
-                self.showingModal.toggle()
-            }).sheet(isPresented: $showingModal) {
-                TaskStartPage(showingModal: self.$showingModal, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
+                self.viewModel.isShowModal.toggle()
+            }).sheet(isPresented: $viewModel.isShowModal) {
+                TaskStartPage(showingModal: self.$viewModel.isShowModal, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
             }.padding(.bottom)
             Spacer()
         }

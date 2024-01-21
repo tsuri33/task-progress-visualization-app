@@ -93,9 +93,7 @@ struct MainPage: View {
                             let task = Task()
                             task.name = taskName
                             task.amount = taskAmount
-                            task.amountToAdvancePerDay = taskAmountToAdvancePerDay
                             task.lastDate = Date()
-                            task.period = period
                             task.numberDoTask = numberDoTask + 1
                             // 保存
                             do {
