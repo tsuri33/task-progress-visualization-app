@@ -3,6 +3,7 @@ import RealmSwift
 
 struct TaskListView: View {
     
+    @StateObject var router = NavigationRouter()
     @ObservedObject var viewModel: TaskListViewModel
     @ObservedResults(Task.self) var tasks
     
@@ -17,41 +18,54 @@ struct TaskListView: View {
 //    @Binding var numberDoTask:Int
     
     var body: some View {
-        VStack {
-            Spacer()
-            Text("完了タスク一覧")
-                .font(.title)
-                .padding(.top)
-            Spacer()
-            Text("達成タスク数：\(tasks.count)個").font(.title3)
-            Spacer()
-            List(tasks) { task in
-                HStack {
-                    Image(systemName: "circlebadge.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 8, height: 8)
-                        .padding()
-                    Text("\(task.name)")
-                        .font(.title3)
-                }
-                .swipeActions(edge: .trailing) {
-                    Button {
-                        // データベース削除
-                    } label: {
-                        Image(systemName: "trash")
+        NavigationStack {
+            VStack {
+                Spacer()
+                Text("完了タスク一覧")
+                    .font(.title)
+                    .padding(.top)
+                Spacer()
+                Text("達成タスク数：\(tasks.count)個").font(.title3)
+                Spacer()
+                List(tasks) { task in
+                    HStack {
+                        Image(systemName: "circlebadge.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 8, height: 8)
+                            .padding()
+                        Text("\(task.name)")
+                            .font(.title3)
                     }
-                    .tint(.red)
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            // データベース削除
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                        .tint(.red)
+                    }
+                }
+                Spacer()
+                ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
+                    self.viewModel.isShowModal.toggle()
+                }).sheet(isPresented: $viewModel.isShowModal) {
+                    TaskStartPage()
+                }.padding(.bottom)
+                Spacer()
+            }
+            .navigationDestination(for: NavigationRouter.Path.self) { value in
+                switch value {
+                case .list:
+                    TaskListView(viewModel: TaskListViewModel())
+                case .start:
+                    TaskStartPage()
+                case .setting:
+                    SettingPage()
                 }
             }
-            Spacer()
-            ButtonView(buttonText: "新しいタスクを開始する！", width: 300, color: .blue, action: {
-                self.viewModel.isShowModal.toggle()
-            }).sheet(isPresented: $viewModel.isShowModal) {
-                TaskStartPage(showingModal: self.$viewModel.isShowModal, taskName: self.$taskName, taskAmount: self.$taskAmount, taskAmountToAdvancePerDay: self.$taskAmountToAdvancePerDay, selectionDate: self.$selectionDate, period: self.$period)
-            }.padding(.bottom)
-            Spacer()
         }
+        .environmentObject(router)
     }
 }
 
