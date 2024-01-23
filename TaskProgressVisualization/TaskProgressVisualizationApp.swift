@@ -4,7 +4,7 @@ import SwiftUI
 struct TaskProgressVisualizationApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(viewModel: ContentViewModel())
         }
     }
 }
