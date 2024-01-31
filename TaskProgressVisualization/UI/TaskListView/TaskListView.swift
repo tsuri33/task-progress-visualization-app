@@ -10,13 +10,6 @@ struct TaskListView: View {
     private var frameWidth: CGFloat {UIScreen.main.bounds.width}
     private var frameHeight: CGFloat {UIScreen.main.bounds.height}
     
-    @Binding var taskName:String
-    @Binding var taskAmount:Int
-    @Binding var taskAmountToAdvancePerDay:Int
-    @Binding var selectionDate:Date
-    @Binding var period:Int
-//    @Binding var numberDoTask:Int
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -70,5 +63,5 @@ struct TaskListView: View {
 }
 
 #Preview {
-    TaskListView(viewModel: TaskListViewModel(), taskName: .constant("数学"), taskAmount: .constant(10), taskAmountToAdvancePerDay: .constant(1), selectionDate: .constant(Date()), period: .constant(10))
+    TaskListView(viewModel: TaskListViewModel())
 }

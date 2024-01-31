@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C26306D2B6A670F008E8EF5 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26306C2B6A670F008E8EF5 /* ContentViewModel.swift */; };
+		5C2630702B6A6774008E8EF5 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C26306F2B6A6774008E8EF5 /* TaskListViewModel.swift */; };
 		5C3A274A2B3BBE5A007BA48C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3A27492B3BBE5A007BA48C /* Models.swift */; };
-		5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4229192B38172100F03F7C /* ViewModels.swift */; };
 		5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */; };
 		5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */; };
 		5C99B6032A553B34006597DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C99B6022A553B34006597DE /* ContentView.swift */; };
@@ -25,8 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C26306C2B6A670F008E8EF5 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		5C26306F2B6A6774008E8EF5 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		5C3A27492B3BBE5A007BA48C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		5C4229192B38172100F03F7C /* ViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels.swift; sourceTree = "<group>"; };
 		5C65F4382A8AF4FD006B2C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSecondStartPege.swift; sourceTree = "<group>"; };
 		5C99B5FD2A553B34006597DE /* TaskProgressVisualization.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskProgressVisualization.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +57,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C26306A2B6A66D1008E8EF5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				5C26306B2B6A66EC008E8EF5 /* ContentView */,
+				5C26306E2B6A674E008E8EF5 /* TaskListView */,
+				5C99B6152A553C8C006597DE /* PartsUI.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		5C26306B2B6A66EC008E8EF5 /* ContentView */ = {
+			isa = PBXGroup;
+			children = (
+				5C99B6022A553B34006597DE /* ContentView.swift */,
+				5C26306C2B6A670F008E8EF5 /* ContentViewModel.swift */,
+			);
+			path = ContentView;
+			sourceTree = "<group>";
+		};
+		5C26306E2B6A674E008E8EF5 /* TaskListView */ = {
+			isa = PBXGroup;
+			children = (
+				5C99B61B2A553CE4006597DE /* TaskListView.swift */,
+				5C26306F2B6A6774008E8EF5 /* TaskListViewModel.swift */,
+			);
+			path = TaskListView;
+			sourceTree = "<group>";
+		};
 		5C99B5F42A553B34006597DE = {
 			isa = PBXGroup;
 			children = (
@@ -77,14 +107,11 @@
 				5C65F4382A8AF4FD006B2C17 /* Info.plist */,
 				5C99B6002A553B34006597DE /* TaskProgressVisualizationApp.swift */,
 				5C3A27492B3BBE5A007BA48C /* Models.swift */,
-				5C4229192B38172100F03F7C /* ViewModels.swift */,
-				5C99B6022A553B34006597DE /* ContentView.swift */,
-				5C99B61B2A553CE4006597DE /* TaskListView.swift */,
+				5C26306A2B6A66D1008E8EF5 /* UI */,
 				5C99B61D2A553D02006597DE /* TaskStartPage.swift */,
 				5C866B932A5D816700AC0390 /* TaskSecondStartPege.swift */,
 				5C99B6132A553C68006597DE /* MainPage.swift */,
 				5C99B6192A553CC7006597DE /* SettingPage.swift */,
-				5C99B6152A553C8C006597DE /* PartsUI.swift */,
 				5C99B6172A553CA5006597DE /* RealmModels.swift */,
 				5C99B6042A553B35006597DE /* Assets.xcassets */,
 				5C99B6062A553B35006597DE /* Preview Content */,
@@ -180,11 +207,12 @@
 				5C3A274A2B3BBE5A007BA48C /* Models.swift in Sources */,
 				5C99B61C2A553CE4006597DE /* TaskListView.swift in Sources */,
 				5C99B6162A553C8C006597DE /* PartsUI.swift in Sources */,
-				5C42291A2B38172100F03F7C /* ViewModels.swift in Sources */,
 				5C99B6032A553B34006597DE /* ContentView.swift in Sources */,
 				5C99B6012A553B34006597DE /* TaskProgressVisualizationApp.swift in Sources */,
+				5C2630702B6A6774008E8EF5 /* TaskListViewModel.swift in Sources */,
 				5C99B61E2A553D02006597DE /* TaskStartPage.swift in Sources */,
 				5C99B6142A553C68006597DE /* MainPage.swift in Sources */,
+				5C26306D2B6A670F008E8EF5 /* ContentViewModel.swift in Sources */,
 				5C99B6182A553CA5006597DE /* RealmModels.swift in Sources */,
 				5C99B61A2A553CC7006597DE /* SettingPage.swift in Sources */,
 				5C866B942A5D816700AC0390 /* TaskSecondStartPege.swift in Sources */,
