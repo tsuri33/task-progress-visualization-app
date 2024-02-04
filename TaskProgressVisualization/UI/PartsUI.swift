@@ -65,66 +65,6 @@ struct ButtonView: View {
     }
 }
 
-struct TaskStartSettingView: View {
-    
-    @Binding var taskName:String
-    @Binding var taskAmount:Int
-    @Binding var taskAmountToAdvancePerDay:Int
-    @State var taskUnits = ["ページ", "問", "個", "章", "枚"]
-    @State var selectedUnits = 0
-    @Binding var selectionDate:Date
-//    @Binding var numberDoTask:Int
-    
-    var body: some View {
-        VStack {
-            Form {
-                Section {
-                    HStack {
-                        Text("タスク名：")
-                        TextField("タスク名をここに入力", text: $taskName)
-                            .multilineTextAlignment(TextAlignment.center)
-                    }.padding()
-                    
-                    HStack {
-                        Text("タスクの量：")
-                        TextField("1", value: $taskAmount, format: .number)
-                            .multilineTextAlignment(TextAlignment.trailing)
-                        Picker(selection: $selectedUnits, label: Text("")) {
-                            ForEach(taskUnits.indices, id: \.self) { unitsIndex in
-                                Text(self.taskUnits[unitsIndex])
-                            }
-                        }.labelsHidden()
-                    }.padding()
-                    
-                    HStack {
-                        Text("1日に進める量：")
-                        Picker("1", selection: $taskAmountToAdvancePerDay) {
-                            ForEach(0...taskAmount, id: \.self) { value in
-                                Text("\(value)")
-                            }
-                        }
-                        .frame(height: 100)
-                        .clipped()
-                        .pickerStyle(.wheel)
-                        
-                        Picker(selection: $selectedUnits, label: Text("")) {
-                            ForEach(taskUnits.indices, id: \.self) { unitsIndex in
-                                Text(self.taskUnits[unitsIndex])
-                            }
-                        }.labelsHidden()
-                    }.padding()
-                    
-                    HStack {
-                        Text("終わらせたい日：")
-                        DatePicker("", selection: $selectionDate, in: Date()..., displayedComponents: .date)
-                    }.padding()
-                    
-                }
-            }.padding(.bottom)
-        }
-    }
-}
-
 struct TaskList: View {
     
     var taskName: String
